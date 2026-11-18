@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="texts.xsd" Version="4.27.0">
+  <Languages>
+    <Language Id="GB" />
+  </Languages>
+  <Texts>
+    <TextGroup Id="Group1">
+      <Text Id="__SingleUse_RGSS" TypographyId="small3" Alignment="Left">
+        <Translation Language="GB">&lt;&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_TR9H" TypographyId="small2" Alignment="Left">
+        <Translation Language="GB">GALAXY</Translation>
+      </Text>
+      <Text Id="__SingleUse_LYSS" TypographyId="small2" Alignment="Center">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_GGUB" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_BPKS" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_YFBD" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_GK1S" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_V2OH" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_JCAK" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_U5ES" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_PJAT" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_M9MY" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_HXPA" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_LHNF" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_GZ77" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_OP79" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_2IJL" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_TSLR" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_SZQ8" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_DGBQ" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_PL5B" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_S4P6" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_GWLM" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_EOW0" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_LKUO" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_ZNXM" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_EXZF" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_6YDQ" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_J6D2" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_86KI" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_DL2C" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_CL90" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_NKEA" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_YNL5" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_CR9R" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_BHY8" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_6QCA" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_V5M4" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_JM39" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_IOHX" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_A9KX" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_9O3J" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_XR91" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_A25N" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_NWY3" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_MDDD" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_VMYC" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_ZVCL" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_AFCX" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_LELA" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_B23E" TypographyId="Default" Alignment="Left">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_LX0Y" TypographyId="Small" Alignment="Left">
+        <Translation Language="GB">&lt;VALUE&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_DOV3" TypographyId="small2" Alignment="Left">
+        <Translation Language="GB">&lt;VALUE&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_C4VB" TypographyId="Small" Alignment="Left">
+        <Translation Language="GB">MENU</Translation>
+      </Text>
+      <Text Id="__SingleUse_YRVV" TypographyId="small2" Alignment="Left">
+        <Translation Language="GB">MENU</Translation>
+      </Text>
+      <Text Id="__SingleUse_B7YR" TypographyId="scrollTextCenterSmall" Alignment="Left">
+        <Translation Language="GB">&lt;VALUE&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_AI8F" TypographyId="scrollTextCenterSmall" Alignment="Left">
+        <Translation Language="GB">&lt;VALUE&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_AFOZ" TypographyId="small2" Alignment="Left">
+        <Translation Language="GB">&lt;VALUE&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_6Y53" TypographyId="small2" Alignment="Left">
+        <Translation Language="GB">&lt;VALUE&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_OK5J" TypographyId="small2" Alignment="Left">
+        <Translation Language="GB">MENU</Translation>
+      </Text>
+      <Text Id="__SingleUse_0FI1" TypographyId="small2" Alignment="Left">
+        <Translation Language="GB">&lt;VALUE&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_78UD" TypographyId="small2" Alignment="Left">
+        <Translation Language="GB">MENU</Translation>
+      </Text>
+      <Text Id="__SingleUse_SR3J" TypographyId="scrollTextSmall" Alignment="Left">
+        <Translation Language="GB">&lt;VALUE&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_53CK" TypographyId="scrollTextSmall" Alignment="Left">
+        <Translation Language="GB">wav file</Translation>
+      </Text>
+      <Text Id="__SingleUse_9T1A" TypographyId="scrollTextCenterSmall" Alignment="Left">
+        <Translation Language="GB">&lt;VALUE&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_254X" TypographyId="scrollTextCenterSmall" Alignment="Left">
+        <Translation Language="GB">wav file</Translation>
+      </Text>
+      <Text Id="__SingleUse_NL0E" TypographyId="scrollTextCenterSmall" Alignment="Left">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_BK6N" TypographyId="scrollTextCenterSmall" Alignment="Left">
+        <Translation Language="GB">player</Translation>
+      </Text>
+      <Text Id="__SingleUse_FPXW" TypographyId="small2" Alignment="Center">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_75QP" TypographyId="small2" Alignment="Center">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_D45A" TypographyId="small2" Alignment="Left">
+        <Translation Language="GB">SPEED&#10;&#10;</Translation>
+      </Text>
+      <Text Id="__SingleUse_NECF" TypographyId="small2" Alignment="Center">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_PX09" TypographyId="small2" Alignment="Left">
+        <Translation Language="GB">255&#10;</Translation>
+      </Text>
+      <Text Id="__SingleUse_9X5E" TypographyId="small2" Alignment="Center">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_QWNP" TypographyId="small2" Alignment="Left">
+        <Translation Language="GB">UPGRADE</Translation>
+      </Text>
+      <Text Id="__SingleUse_LIVF" TypographyId="Small" Alignment="Center">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_T6YM" TypographyId="Small" Alignment="Left">
+        <Translation Language="GB">SEARCHING&#10;</Translation>
+      </Text>
+      <Text Id="__SingleUse_OKO4" TypographyId="small2" Alignment="Center">
+        <Translation Language="GB">IDLE</Translation>
+      </Text>
+      <Text Id="__SingleUse_A3PZ" TypographyId="scrollTextSmall" Alignment="Center">
+        <Translation Language="GB">DAYS</Translation>
+      </Text>
+      <Text Id="__SingleUse_0G9A" TypographyId="scrollTextSmall" Alignment="Center">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_PBTG" TypographyId="scrollTextSmall" Alignment="Left">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_R82D" TypographyId="small2" Alignment="Left">
+        <Translation Language="GB">SETTING</Translation>
+      </Text>
+      <Text Id="__SingleUse_K92P" TypographyId="small2" Alignment="Center">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_QSBK" TypographyId="small2" Alignment="Left">
+        <Translation Language="GB">AUTOWAV</Translation>
+      </Text>
+      <Text Id="__SingleUse_7ENR" TypographyId="Small" Alignment="Center">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_6C8B" TypographyId="Small" Alignment="Left">
+        <Translation Language="GB">OPTION</Translation>
+      </Text>
+      <Text Id="__SingleUse_GQAC" TypographyId="Small" Alignment="Center">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_42I1" TypographyId="Small" Alignment="Left">
+        <Translation Language="GB">RAND</Translation>
+      </Text>
+      <Text Id="__SingleUse_B6PT" TypographyId="small2" Alignment="Center">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_O0TD" TypographyId="small2" Alignment="Left">
+        <Translation Language="GB">PLAYING</Translation>
+      </Text>
+      <Text Id="__SingleUse_XTCL" TypographyId="Small" Alignment="Center">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_TG92" TypographyId="Small" Alignment="Left">
+        <Translation Language="GB">OPTION</Translation>
+      </Text>
+      <Text Id="__SingleUse_MTB3" TypographyId="Small" Alignment="Center">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_V190" TypographyId="Small" Alignment="Left">
+        <Translation Language="GB">RAND</Translation>
+      </Text>
+      <Text Id="__SingleUse_UUCS" TypographyId="small2" Alignment="Center">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_GU8E" TypographyId="small2" Alignment="Left">
+        <Translation Language="GB">GIF</Translation>
+      </Text>
+      <Text Id="__SingleUse_7QOQ" TypographyId="small3" Alignment="Center">
+        <Translation Language="GB">&lt;&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_JIQH" TypographyId="Small" Alignment="Center">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_505N" TypographyId="Small" Alignment="Left">
+        <Translation Language="GB">OPTION</Translation>
+      </Text>
+      <Text Id="__SingleUse_YMI4" TypographyId="Small" Alignment="Center">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_0ZMN" TypographyId="Small" Alignment="Left">
+        <Translation Language="GB">RAND</Translation>
+      </Text>
+      <Text Id="__SingleUse_CK0D" TypographyId="small2" Alignment="Center">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_TQJF" TypographyId="small3" Alignment="Center">
+        <Translation Language="GB">&lt;&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_GSOU" TypographyId="small2" Alignment="Left">
+        <Translation Language="GB">THEME</Translation>
+      </Text>
+    </TextGroup>
+  </Texts>
+  <Typographies>
+    <Typography Id="small3" Font="verdana.ttf" Size="10" Bpp="1" Direction="LTR" FallbackCharacter="-" WidgetWildcardCharacters="0123456789 :APM" WildcardCharacterRanges="0-Z" IsVector="no" />
+    <Typography Id="small2" Font="verdana.ttf" Size="10" Bpp="1" Direction="LTR" FallbackCharacter="-" WildcardCharacterRanges="0-Z" IsVector="no" />
+    <Typography Id="Default" Font="verdana.ttf" Size="20" Bpp="1" Direction="LTR" FallbackCharacter="?" IsVector="no" />
+    <Typography Id="Small" Font="verdana.ttf" Size="8" Bpp="1" Direction="LTR" FallbackCharacter="-" WildcardCharacterRanges="0-Z" IsVector="no" />
+    <Typography Id="scrollTextCenterSmall" Font="verdana.ttf" Size="10" Bpp="1" Direction="LTR" FallbackCharacter="-" WildcardCharacterRanges="a-z" IsVector="no" />
+    <Typography Id="scrollTextSmall" Font="verdana.ttf" Size="8" Bpp="1" Direction="LTR" FallbackCharacter="-" WildcardCharacterRanges="a-z" IsVector="no" />
+    <Typography Id="Large" Font="verdana.ttf" Size="40" Bpp="1" Direction="LTR" FallbackCharacter="?" IsVector="no" />
+    <Typography Id="small4" Font="verdana.ttf" Size="7" Bpp="1" Direction="LTR" FallbackCharacter="-" WildcardCharacterRanges="0-Z" IsVector="no" />
+  </Typographies>
+</TextDatabase>

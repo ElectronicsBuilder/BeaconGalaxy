@@ -45,8 +45,8 @@ void MX_GPIO_Init(void)
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
@@ -61,8 +61,10 @@ void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOB, OLED_DC_Pin|LED_GREEN_Pin|LED_ORANGE_Pin|LED_RED_Pin
                           |LED_BLUE_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : BTN_UP_Pin BTN_DOWN_Pin BTN_BACK_Pin BTN_ENTER_Pin */
-  GPIO_InitStruct.Pin = BTN_UP_Pin|BTN_DOWN_Pin|BTN_BACK_Pin|BTN_ENTER_Pin;
+  /*Configure GPIO pins : SD_DETECT_NC_Pin BTN_UP_Pin BTN_DOWN_Pin BTN_BACK_Pin
+                           BTN_ENTER_Pin */
+  GPIO_InitStruct.Pin = SD_DETECT_NC_Pin|BTN_UP_Pin|BTN_DOWN_Pin|BTN_BACK_Pin
+                          |BTN_ENTER_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);

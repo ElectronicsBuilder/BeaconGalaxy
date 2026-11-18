@@ -1,0 +1,1595 @@
+{
+  "Application": {
+    "Screens": [
+      {
+        "Name": "screen",
+        "CanvasBufferSize": 960,
+        "Components": [
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder1",
+            "X": 1,
+            "Y": 1,
+            "Width": 62,
+            "Height": 46,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "DigitalClock",
+            "Name": "digitalClock",
+            "X": 8,
+            "Y": 21,
+            "Width": 53,
+            "Height": 12,
+            "TextColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextId": "__SingleUse_RGSS",
+            "DisplaySeconds": true,
+            "DisplayLeadingZeroForHourIndicator": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "X": 14,
+            "Y": 1,
+            "Width": 40,
+            "Height": 13,
+            "TextId": "__SingleUse_TR9H",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2",
+            "X": 21,
+            "Y": 11,
+            "Width": 24,
+            "Height": 13,
+            "TextId": "__SingleUse_OKO4",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea3",
+            "X": 37,
+            "Y": 34,
+            "Width": 22,
+            "Height": 10,
+            "TextId": "__SingleUse_A3PZ",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea4",
+            "X": 22,
+            "Y": 34,
+            "Width": 5,
+            "Height": 10,
+            "TextId": "__SingleUse_0G9A",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_PBTG",
+              "UseBuffer": true,
+              "BufferSize": 4
+            }
+          },
+          {
+            "Type": "Circle",
+            "Name": "circle1",
+            "X": 47,
+            "Y": 9,
+            "Width": 15,
+            "Height": 15,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "CenterX": 7.0,
+            "CenterY": 7.0,
+            "Radius": 5.0,
+            "EndAngle": 360.0,
+            "CapPrecision": "Butt"
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 1
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "East",
+              "ActionComponent": "Screen1"
+            }
+          },
+          {
+            "InteractionName": "Interaction2",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 3
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Autoplaywav"
+            }
+          },
+          {
+            "InteractionName": "Interaction3",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 2
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Autogif"
+            }
+          },
+          {
+            "InteractionName": "Interaction4",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 4
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Autotheme"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Screen1",
+        "Components": [
+          {
+            "Type": "ScrollWheel",
+            "Name": "scrollWheel1",
+            "X": 2,
+            "Y": 2,
+            "Width": 61,
+            "Height": 44,
+            "UseSelectedStyle": true,
+            "SelectedItemTemplateName": "TextCenterContainer",
+            "ItemTemplateName": "TextContainer",
+            "NumberofItems": 10,
+            "Easing": "Back",
+            "EasingOption": "Out",
+            "SwipeAcceleration": 1.0,
+            "DragAcceleration": 1.0
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 1
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "themes"
+            }
+          },
+          {
+            "InteractionName": "Interaction2",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 1
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "GIFs"
+            }
+          },
+          {
+            "InteractionName": "Interaction3",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 1
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Equalizer"
+            }
+          },
+          {
+            "InteractionName": "Interaction4",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 1
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Colors"
+            }
+          },
+          {
+            "InteractionName": "Interaction5",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 1
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Audio"
+            }
+          },
+          {
+            "InteractionName": "Interaction6",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 1
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Setting"
+            }
+          },
+          {
+            "InteractionName": "Interaction7",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 1
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Upgrade"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "themes",
+        "Components": [
+          {
+            "Type": "ScrollWheel",
+            "Name": "scrollWheel1",
+            "X": 2,
+            "Y": 2,
+            "Width": 61,
+            "Height": 44,
+            "UseSelectedStyle": true,
+            "SelectedItemTemplateName": "TextCenterContainer",
+            "ItemTemplateName": "TextContainer",
+            "NumberofItems": 10,
+            "Easing": "Back",
+            "EasingOption": "Out",
+            "SwipeAcceleration": 1.0,
+            "DragAcceleration": 1.0
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 2
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Screen1"
+            }
+          },
+          {
+            "InteractionName": "Interaction2",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 1
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "page"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "GIFs",
+        "Components": [
+          {
+            "Type": "ScrollWheel",
+            "Name": "scrollWheel1",
+            "X": 2,
+            "Y": 2,
+            "Width": 61,
+            "Height": 44,
+            "UseSelectedStyle": true,
+            "SelectedItemTemplateName": "TextCenterContainer",
+            "ItemTemplateName": "TextContainer",
+            "NumberofItems": 10,
+            "Easing": "Back",
+            "EasingOption": "Out",
+            "SwipeAcceleration": 1.0,
+            "DragAcceleration": 1.0
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 2
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Screen1"
+            }
+          },
+          {
+            "InteractionName": "Interaction2",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 1
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "page"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "page",
+        "Components": [
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder1",
+            "X": 1,
+            "Y": 1,
+            "Width": 62,
+            "Height": 46,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "X": 3,
+            "Y": 3,
+            "Width": 58,
+            "Height": 13,
+            "TextId": "__SingleUse_LYSS",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 2
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "themes"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Equalizer",
+        "Components": [
+          {
+            "Type": "ScrollWheel",
+            "Name": "scrollWheel1",
+            "X": 2,
+            "Y": 2,
+            "Width": 61,
+            "Height": 44,
+            "UseSelectedStyle": true,
+            "SelectedItemTemplateName": "TextCenterContainer",
+            "ItemTemplateName": "TextContainer",
+            "NumberofItems": 10,
+            "Easing": "Back",
+            "EasingOption": "Out",
+            "SwipeAcceleration": 1.0,
+            "DragAcceleration": 1.0
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 2
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Screen1"
+            }
+          },
+          {
+            "InteractionName": "Interaction2",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 1
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "page"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Colors",
+        "Components": [
+          {
+            "Type": "ScrollWheel",
+            "Name": "scrollWheel1",
+            "X": 2,
+            "Y": 2,
+            "Width": 61,
+            "Height": 44,
+            "UseSelectedStyle": true,
+            "SelectedItemTemplateName": "TextCenterContainer",
+            "ItemTemplateName": "TextContainer",
+            "NumberofItems": 10,
+            "Easing": "Back",
+            "EasingOption": "Out",
+            "SwipeAcceleration": 1.0,
+            "DragAcceleration": 1.0
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 2
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Screen1"
+            }
+          },
+          {
+            "InteractionName": "Interaction2",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 1
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Userset"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Audio",
+        "Components": [
+          {
+            "Type": "ScrollWheel",
+            "Name": "scrollWheel1",
+            "X": 2,
+            "Y": 2,
+            "Width": 61,
+            "Height": 44,
+            "UseSelectedStyle": true,
+            "SelectedItemTemplateName": "TextCenterContainer",
+            "ItemTemplateName": "TextContainer",
+            "NumberofItems": 10,
+            "Easing": "Back",
+            "EasingOption": "Out",
+            "SwipeAcceleration": 1.0,
+            "DragAcceleration": 1.0
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 2
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Screen1"
+            }
+          },
+          {
+            "InteractionName": "Interaction2",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 1
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "page"
+            }
+          },
+          {
+            "InteractionName": "Interaction3",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 1
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Playlist"
+            }
+          },
+          {
+            "InteractionName": "Interaction4",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 1
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Usernav"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Setting",
+        "Components": [
+          {
+            "Type": "ScrollWheel",
+            "Name": "scrollWheel1",
+            "X": 2,
+            "Y": 2,
+            "Width": 61,
+            "Height": 44,
+            "UseSelectedStyle": true,
+            "SelectedItemTemplateName": "TextCenterContainer",
+            "ItemTemplateName": "TextContainer",
+            "NumberofItems": 10,
+            "Easing": "Back",
+            "EasingOption": "Out",
+            "SwipeAcceleration": 1.0,
+            "DragAcceleration": 1.0
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 2
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Screen1"
+            }
+          },
+          {
+            "InteractionName": "Interaction2",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 1
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "page"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Playlist",
+        "Components": [
+          {
+            "Type": "ScrollWheel",
+            "Name": "scrollWheel1",
+            "X": 2,
+            "Y": 2,
+            "Width": 61,
+            "Height": 44,
+            "UseSelectedStyle": true,
+            "SelectedItemTemplateName": "TextCenterScrollContainer",
+            "ItemTemplateName": "TextScrollContainer",
+            "NumberofItems": 50,
+            "Easing": "Back",
+            "EasingOption": "Out",
+            "SwipeAcceleration": 1.0,
+            "DragAcceleration": 1.0
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 2
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Screen1"
+            }
+          },
+          {
+            "InteractionName": "Interaction2",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 1
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Player"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Player",
+        "Components": [
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder1",
+            "X": 1,
+            "Y": 1,
+            "Width": 62,
+            "Height": 46,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder1_1",
+            "X": 1,
+            "Y": 1,
+            "Width": 62,
+            "Height": 15,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "X": 3,
+            "Y": 3,
+            "Width": 58,
+            "Height": 13,
+            "TextId": "__SingleUse_NL0E",
+            "TextRotation": "0",
+            "Wildcard1": {
+              "TextId": "__SingleUse_BK6N",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          },
+          {
+            "Type": "Image",
+            "Name": "image1",
+            "X": 3,
+            "Y": 16,
+            "Width": 58,
+            "Height": 30,
+            "RelativeFilename": "music1.png"
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Playlist"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Userset",
+        "Components": [
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder1",
+            "X": 1,
+            "Y": 1,
+            "Width": 62,
+            "Height": 46,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "X": 1,
+            "Y": 3,
+            "Width": 61,
+            "Height": 15,
+            "TextId": "__SingleUse_FPXW",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_R82D",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2",
+            "X": 3,
+            "Y": 20,
+            "Width": 33,
+            "Height": 39,
+            "TextId": "__SingleUse_75QP",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_D45A",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder2",
+            "X": 37,
+            "Y": 19,
+            "Width": 23,
+            "Height": 14,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 1
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea3",
+            "X": 38,
+            "Y": 20,
+            "Width": 19,
+            "Height": 26,
+            "TextId": "__SingleUse_NECF",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_PX09",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          }
+        ],
+        "Interactions": []
+      },
+      {
+        "Name": "Usernav",
+        "Components": [
+          {
+            "Type": "ScrollWheel",
+            "Name": "scrollWheel1",
+            "X": 2,
+            "Y": 2,
+            "Width": 61,
+            "Height": 44,
+            "UseSelectedStyle": true,
+            "SelectedItemTemplateName": "TextCenterContainer",
+            "ItemTemplateName": "TextContainer",
+            "NumberofItems": 10,
+            "Easing": "Back",
+            "EasingOption": "Out",
+            "SwipeAcceleration": 1.0,
+            "DragAcceleration": 1.0
+          }
+        ],
+        "Interactions": []
+      },
+      {
+        "Name": "Upgrade",
+        "Components": [
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder1",
+            "X": 1,
+            "Y": 1,
+            "Width": 62,
+            "Height": 46,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "X": 3,
+            "Y": 3,
+            "Width": 61,
+            "Height": 15,
+            "TextId": "__SingleUse_9X5E",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_QWNP",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder2",
+            "X": 4,
+            "Y": 15,
+            "Width": 56,
+            "Height": 15,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2",
+            "X": 5,
+            "Y": 17,
+            "Width": 55,
+            "Height": 12,
+            "TextId": "__SingleUse_LIVF",
+            "TextRotation": "0",
+            "Wildcard1": {
+              "TextId": "__SingleUse_T6YM",
+              "UseBuffer": true,
+              "BufferSize": 12
+            }
+          },
+          {
+            "Type": "BoxProgress",
+            "Name": "boxProgress1",
+            "X": 5,
+            "Y": 30,
+            "Width": 53,
+            "Height": 12,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Direction": "Right",
+            "FileNameBackground": "progressbar1.png",
+            "IndicatorPositionX": 2,
+            "IndicatorPositionY": 2,
+            "IndicatorPositionWidth": 50,
+            "IndicatorPositionHeight": 8,
+            "ProgressRangeMax": 100,
+            "ProgressInitialValue": 8
+          }
+        ],
+        "Interactions": []
+      },
+      {
+        "Name": "Autoplaywav",
+        "Components": [
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder1",
+            "X": 1,
+            "Y": 1,
+            "Width": 62,
+            "Height": 46,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "X": 1,
+            "Y": 3,
+            "Width": 62,
+            "Height": 12,
+            "TextId": "__SingleUse_K92P",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_QSBK",
+              "UseBuffer": true,
+              "BufferSize": 12
+            }
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder2",
+            "X": 3,
+            "Y": 17,
+            "Width": 58,
+            "Height": 15,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 1
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea3",
+            "Y": 34,
+            "Width": 39,
+            "Height": 12,
+            "TextId": "__SingleUse_7ENR",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_6C8B",
+              "UseBuffer": true,
+              "BufferSize": 12
+            }
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder3",
+            "X": 35,
+            "Y": 33,
+            "Width": 26,
+            "Height": 12,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 1
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea4",
+            "X": 35,
+            "Y": 34,
+            "Width": 26,
+            "Height": 12,
+            "TextId": "__SingleUse_GQAC",
+            "TextRotation": "0",
+            "Wildcard1": {
+              "TextId": "__SingleUse_42I1",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2",
+            "X": 5,
+            "Y": 18,
+            "Width": 54,
+            "Height": 12,
+            "TextId": "__SingleUse_B6PT",
+            "TextRotation": "0",
+            "Wildcard1": {
+              "TextId": "__SingleUse_O0TD",
+              "UseBuffer": true,
+              "BufferSize": 12
+            }
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 4
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "screen"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Autogif",
+        "Components": [
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder1",
+            "X": 1,
+            "Y": 1,
+            "Width": 62,
+            "Height": 46,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder2",
+            "X": 3,
+            "Y": 17,
+            "Width": 58,
+            "Height": 15,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 1
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea3",
+            "Y": 34,
+            "Width": 39,
+            "Height": 12,
+            "TextId": "__SingleUse_XTCL",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_TG92",
+              "UseBuffer": true,
+              "BufferSize": 12
+            }
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder3",
+            "X": 35,
+            "Y": 33,
+            "Width": 26,
+            "Height": 12,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 1
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea4",
+            "X": 35,
+            "Y": 34,
+            "Width": 26,
+            "Height": 12,
+            "TextId": "__SingleUse_MTB3",
+            "TextRotation": "0",
+            "Wildcard1": {
+              "TextId": "__SingleUse_V190",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2",
+            "X": 5,
+            "Y": 18,
+            "Width": 54,
+            "Height": 12,
+            "TextId": "__SingleUse_UUCS",
+            "TextRotation": "0",
+            "Wildcard1": {
+              "TextId": "__SingleUse_GU8E",
+              "UseBuffer": true,
+              "BufferSize": 12
+            }
+          },
+          {
+            "Type": "DigitalClock",
+            "Name": "digitalClock",
+            "X": 4,
+            "Y": 4,
+            "Width": 56,
+            "Height": 12,
+            "TextColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextId": "__SingleUse_7QOQ",
+            "DisplaySeconds": true,
+            "DisplayLeadingZeroForHourIndicator": true
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 2
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "screen"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Autotheme",
+        "Components": [
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder1",
+            "X": 1,
+            "Y": 1,
+            "Width": 62,
+            "Height": 46,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder2",
+            "X": 3,
+            "Y": 17,
+            "Width": 58,
+            "Height": 15,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 1
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea3",
+            "Y": 34,
+            "Width": 39,
+            "Height": 12,
+            "TextId": "__SingleUse_JIQH",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_505N",
+              "UseBuffer": true,
+              "BufferSize": 12
+            }
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder3",
+            "X": 35,
+            "Y": 33,
+            "Width": 26,
+            "Height": 12,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 1
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea4",
+            "X": 35,
+            "Y": 34,
+            "Width": 26,
+            "Height": 12,
+            "TextId": "__SingleUse_YMI4",
+            "TextRotation": "0",
+            "Wildcard1": {
+              "TextId": "__SingleUse_0ZMN",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2",
+            "X": 5,
+            "Y": 18,
+            "Width": 54,
+            "Height": 12,
+            "TextId": "__SingleUse_CK0D",
+            "TextRotation": "0",
+            "Wildcard1": {
+              "TextId": "__SingleUse_GSOU",
+              "UseBuffer": true,
+              "BufferSize": 12
+            }
+          },
+          {
+            "Type": "DigitalClock",
+            "Name": "digitalClock",
+            "X": 4,
+            "Y": 4,
+            "Width": 56,
+            "Height": 12,
+            "TextColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextId": "__SingleUse_TQJF",
+            "DisplaySeconds": true,
+            "DisplayLeadingZeroForHourIndicator": true
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerPhysicalButtonClicked",
+              "ButtonKey": 2
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "screen"
+            }
+          }
+        ]
+      }
+    ],
+    "CustomContainerDefinitions": [
+      {
+        "Name": "TextContainer",
+        "X": 3,
+        "Y": 3,
+        "Width": 61,
+        "Height": 15,
+        "Components": [
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "Width": 61,
+            "Height": 15,
+            "TextId": "__SingleUse_LX0Y",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_C4VB",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          }
+        ],
+        "Interactions": []
+      },
+      {
+        "Name": "TextCenterContainer",
+        "X": 3,
+        "Y": 3,
+        "Width": 61,
+        "Height": 15,
+        "Components": [
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder1",
+            "Width": 61,
+            "Height": 15,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 1,
+            "Alpha": 0
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "Width": 61,
+            "Height": 15,
+            "TextId": "__SingleUse_DOV3",
+            "TextRotation": "0",
+            "Wildcard1": {
+              "TextId": "__SingleUse_YRVV",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          }
+        ],
+        "Interactions": []
+      },
+      {
+        "Name": "TextCenterScrollContainer",
+        "X": 3,
+        "Y": 3,
+        "Width": 61,
+        "Height": 15,
+        "Components": [
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder1",
+            "Width": 61,
+            "Height": 15,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 1,
+            "Alpha": 0
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "Width": 61,
+            "Height": 15,
+            "TextId": "__SingleUse_9T1A",
+            "TextRotation": "0",
+            "Wildcard1": {
+              "TextId": "__SingleUse_254X",
+              "UseBuffer": true,
+              "BufferSize": 50
+            }
+          }
+        ],
+        "Interactions": []
+      },
+      {
+        "Name": "TextScrollContainer",
+        "X": 3,
+        "Y": 3,
+        "Width": 61,
+        "Height": 15,
+        "Components": [
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "Width": 61,
+            "Height": 15,
+            "TextId": "__SingleUse_SR3J",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_53CK",
+              "UseBuffer": true,
+              "BufferSize": 50
+            }
+          }
+        ],
+        "Interactions": []
+      },
+      {
+        "Name": "Horizontallist",
+        "X": 3,
+        "Y": 3,
+        "Width": 61,
+        "Height": 15,
+        "Components": [
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder1",
+            "Width": 61,
+            "Height": 15,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 1,
+            "Alpha": 0
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "Width": 61,
+            "Height": 15,
+            "TextId": "__SingleUse_AI8F",
+            "TextRotation": "0",
+            "Wildcard1": {
+              "UseBuffer": true,
+              "BufferSize": 50
+            }
+          }
+        ],
+        "Interactions": []
+      }
+    ],
+    "Name": "BeaconGalaxy",
+    "Resolution": {
+      "Width": 64,
+      "Height": 48
+    },
+    "SelectedColorDepth": 1,
+    "StartupScreenName": "screen",
+    "SelectedStartupLanguage": "GB",
+    "TouchGfxPath": "../Middlewares/ST/touchgfx",
+    "UIPath": ".",
+    "AvailableColorDepths": [
+      1
+    ],
+    "AvailableLCDs": {
+      "1": "LCD1bpp"
+    },
+    "AvailableSections": [
+      "ExtFlashSection",
+      "IntFlashSection"
+    ],
+    "AvailableResolutions": [
+      {
+        "Width": 64,
+        "Height": 48
+      }
+    ],
+    "PhysicalButtons": [
+      {
+        "Key": 1,
+        "Name": "BTN_ENTER"
+      },
+      {
+        "Key": 2,
+        "Name": "BTN_BACK"
+      },
+      {
+        "Key": 3,
+        "Name": "BTN_UP"
+      },
+      {
+        "Key": 4,
+        "Name": "BTN_DOWN"
+      }
+    ],
+    "GenerateAssetsCommand": "make -f simulator/gcc/Makefile assets -j8",
+    "PostGenerateCommand": "touchgfx update_project --project-file=simulator/msvs/Application.vcxproj",
+    "PostGenerateTargetCommand": "touchgfx update_project",
+    "CompileSimulatorCommand": "make -f simulator/gcc/Makefile -j8",
+    "RunSimulatorCommand": "build\\bin\\simulator.exe",
+    "LandscapeSkinX": 0,
+    "LandscapeSkinY": 0,
+    "PortraitSkinX": 0,
+    "PortraitSkinY": 0,
+    "DisplayOrientation": "Landscape",
+    "Family": "STM32F4",
+    "SubFamily": "STM32F405/415",
+    "Toolchain": "CMake",
+    "Platform": "m4",
+    "ProjectFile": "../BeaconGalaxy.ioc",
+    "OptionalComponentsRoot": "../Middlewares/ST/touchgfx_components",
+    "OptionalComponents": [],
+    "AdditionalFeatures": []
+  },
+  "Version": "4.27.0"
+}

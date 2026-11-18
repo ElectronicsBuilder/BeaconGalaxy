@@ -37,6 +37,9 @@ add_executable(${CMAKE_PROJECT_NAME})
 # Add STM32CubeMX generated sources
 add_subdirectory(cmake/stm32cubemx)
 
+# Add touchgfx generated sources and libraries
+add_subdirectory(cmake/touchgfx)
+
 # ---------------------------------------------------------------------------
 # BeaconGalaxy application code (App/) and code shared with AudioGalaxy
 # (../common). CubeMX owns Core/, Drivers/, Middlewares/, FATFS/.
@@ -61,13 +64,18 @@ set(COMMON_SOURCES
     ${COMMON_DIR}/link/galaxy_link.c
     ${COMMON_DIR}/stm32f4/uart_io.c)
 
-target_sources(${CMAKE_PROJECT_NAME} PRIVATE ${APP_SOURCES} ${COMMON_SOURCES})
+# TouchGFX target code we own (outside target/generated, kept by code generation)
+set(GUI_TARGET_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/TouchGFX/target/GalaxyButtonController.cpp)
+
+target_sources(${CMAKE_PROJECT_NAME} PRIVATE ${APP_SOURCES} ${COMMON_SOURCES} ${GUI_TARGET_SOURCES})
 
 # Own code: extra warnings (CI fails on any warning in App/ or common/)
 set_source_files_properties(${APP_SOURCES} ${COMMON_SOURCES} PROPERTIES COMPILE_OPTIONS "-Wextra")
 
-# Add include paths
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
+# Add include paths (the TouchGFX GUI library needs the App headers too:
+# the GUI reaches the application through App/Ui/ui_bridge.h)
+set(APP_INCLUDE_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}/App/Main
     ${CMAKE_CURRENT_SOURCE_DIR}/App/Console
     ${CMAKE_CURRENT_SOURCE_DIR}/App/Board
@@ -75,11 +83,16 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/App/Eeprom
     ${CMAKE_CURRENT_SOURCE_DIR}/App/Storage
     ${CMAKE_CURRENT_SOURCE_DIR}/App/Link
+    ${CMAKE_CURRENT_SOURCE_DIR}/App/Settings
+    ${CMAKE_CURRENT_SOURCE_DIR}/App/Gif
+    ${CMAKE_CURRENT_SOURCE_DIR}/App/Ui
     ${COMMON_DIR}/cli
     ${COMMON_DIR}/util
     ${COMMON_DIR}/link
     ${COMMON_DIR}/stm32f4
 )
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${APP_INCLUDE_DIRS})
+target_include_directories(TouchGFX PRIVATE ${APP_INCLUDE_DIRS})
 
 # Remove wrong libob.a library dependency when using cpp files
 list(REMOVE_ITEM CMAKE_C_IMPLICIT_LINK_LIBRARIES ob)

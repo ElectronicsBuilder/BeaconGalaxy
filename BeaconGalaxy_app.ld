@@ -103,6 +103,10 @@ SECTIONS
     . = ALIGN(4);
     *(.rodata)         /* .rodata sections (constants, strings, etc.) */
     *(.rodata*)        /* .rodata* sections (constants, strings, etc.) */
+    *(ExtFlashSection ExtFlashSection.*)    /* TouchGFX images */
+    *(FontFlashSection FontFlashSection.*)  /* TouchGFX fonts */
+    *(TextFlashSection TextFlashSection.*)  /* TouchGFX texts */
+    *(IntFlashSection IntFlashSection.*)
     . = ALIGN(4);
   } >FLASH
 
@@ -237,6 +241,7 @@ SECTIONS
     *(.bss)
     *(.bss*)
     *(COMMON)
+    *(TouchGFX_Framebuffer)                 /* 64x48 1 bpp = 384 bytes */
 
       . = ALIGN(4);
     _ebss = .;         /* define a global symbol at bss end */

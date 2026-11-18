@@ -16,6 +16,19 @@ static void P_Delay(uint32_t ms)
   else HAL_Delay(ms);
 }
 
+/* The GUI task and the console both draw: one user of the bus at a time. */
+static osMutexId_t lock;
+
+static void P_Lock(void)
+{
+  if (lock) osMutexAcquire(lock, osWaitForever);
+}
+
+static void P_Unlock(void)
+{
+  if (lock) osMutexRelease(lock);
+}
+
 static void P_SpiInit(void)
 {
   __HAL_RCC_SPI1_CLK_ENABLE();
@@ -63,6 +76,7 @@ static void P_Data(const uint8_t *d, uint32_t len)
 
 void Oled_Init(void)
 {
+  if (lock == NULL && osKernelGetState() == osKernelRunning) lock = osMutexNew(NULL);
   P_SpiInit();
   HAL_GPIO_WritePin(OLED_CS_GPIO_Port, OLED_CS_Pin, GPIO_PIN_SET);
   HAL_GPIO_WritePin(OLED_RST_GPIO_Port, OLED_RST_Pin, GPIO_PIN_SET);
@@ -99,6 +113,7 @@ void Oled_Init(void)
 void Oled_Flush(const uint8_t *fb)
 {
   static uint8_t pages[OLED_FB_SIZE];
+  P_Lock();
   Oled_ToPages(fb, pages);
   for (uint8_t p = 0; p < OLED_HEIGHT / 8; p++)
   {
@@ -106,24 +121,31 @@ void Oled_Flush(const uint8_t *fb)
     P_Cmd(addr, sizeof addr);
     P_Data(&pages[p * OLED_WIDTH], OLED_WIDTH);
   }
+  P_Unlock();
 }
 
 void Oled_SetContrast(uint8_t c)
 {
   const uint8_t cmd[2] = { 0x81, c };
+  P_Lock();
   P_Cmd(cmd, 2);
+  P_Unlock();
 }
 
 void Oled_Power(int on)
 {
   const uint8_t cmd = on ? 0xAF : 0xAE;
+  P_Lock();
   P_Cmd(&cmd, 1);
+  P_Unlock();
 }
 
 void Oled_Invert(int on)
 {
   const uint8_t cmd = on ? 0xA7 : 0xA6;
+  P_Lock();
   P_Cmd(&cmd, 1);
+  P_Unlock();
 }
 #endif /* OLED_HOST_TEST */
 
