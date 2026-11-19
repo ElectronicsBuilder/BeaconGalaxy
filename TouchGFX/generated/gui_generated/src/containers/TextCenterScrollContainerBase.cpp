@@ -13,7 +13,6 @@ TextCenterScrollContainerBase::TextCenterScrollContainerBase()
     boxWithBorder1.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     boxWithBorder1.setBorderColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     boxWithBorder1.setBorderSize(1);
-    boxWithBorder1.setAlpha(0);
     add(boxWithBorder1);
 
     textArea1.setPosition(0, 0, 61, 15);

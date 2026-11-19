@@ -157,6 +157,8 @@ static void P_Execute(const UiCmd *c)
     case UI_AUDIO_PLAY:    Link_Send(GX_PLAY, c->a); break;
     case UI_AUDIO_STOP:    Link_Send(GX_STOP, 0); break;
     case UI_AUDIO_START:   Link_Send(GX_START, 0); break;
+    case UI_AUDIO_PAUSE:   Link_Send(GX_PAUSE, 0); break;
+    case UI_AUDIO_RESUME:  Link_Send(GX_RESUME, 0); break;
     case UI_AUDIO_VOLUME:  Link_Send(GX_VOL, c->a); break;
     case UI_AUDIO_RECALL:
       Link_Send(GX_RECALLVOL, s->volume);

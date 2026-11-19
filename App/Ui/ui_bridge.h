@@ -29,7 +29,9 @@ typedef enum {
   UI_AUDIO_GET_PLAYLIST,
   UI_AUDIO_PLAY,          /* a = track index */
   UI_AUDIO_STOP,
-  UI_AUDIO_START,
+  UI_AUDIO_START,         /* play, or resume when paused */
+  UI_AUDIO_PAUSE,
+  UI_AUDIO_RESUME,
   UI_AUDIO_VOLUME,        /* a = 0..100, live (not stored) */
   UI_AUDIO_RECALL,        /* send the stored volume and repeat mode to the audio board */
   UI_AUDIO_REPEAT,        /* a = 0 off / 1 on */

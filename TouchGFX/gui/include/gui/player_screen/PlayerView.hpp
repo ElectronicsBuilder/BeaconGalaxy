@@ -5,7 +5,9 @@
 #include <gui/player_screen/PlayerPresenter.hpp>
 #include <gui/common/Ui.hpp>
 
-/* Now playing: the track name (ui::page.title), scrolled when it is long. */
+/* Now playing: the track name (ui::page.title), scrolled when it is long.
+ * ENTER = pause / resume, DOWN = stop, UP = play the track again,
+ * BACK = back to the playlist (the track keeps playing). */
 class PlayerView : public PlayerViewBase
 {
 public:
@@ -17,7 +19,11 @@ public:
     virtual void handleKeyEvent(uint8_t key);
 
 protected:
+    enum State { PLAYING, PAUSED, STOPPED };
+    void show(State s);
     ui::Marquee title;
+    State state;
+    uint32_t waveEnds;
 };
 
 #endif // PLAYERVIEW_HPP

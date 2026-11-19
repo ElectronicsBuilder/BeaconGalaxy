@@ -6,7 +6,8 @@
 #include <gui/common/Ui.hpp>
 
 /* Autoplay WAVs: plays the playlist, moving on at every WAVEEND from the audio
- * board. ENTER = next, UP = random order, DOWN = sequential, BACK = start screen. */
+ * board. ENTER = pause / resume, UP = next track, DOWN = sequential <-> random,
+ * BACK = stop the audio and return to the start screen. */
 class AutoplaywavView : public AutoplaywavViewBase
 {
 public:
@@ -22,6 +23,7 @@ protected:
     void showMode();
     ui::Marquee title;
     uint32_t waveEnds;
+    bool paused;
 };
 
 #endif // AUTOPLAYWAVVIEW_HPP

@@ -1399,8 +1399,7 @@
               "Green": 255,
               "Blue": 255
             },
-            "BorderSize": 1,
-            "Alpha": 0
+            "BorderSize": 1
           },
           {
             "Type": "TextArea",
@@ -1440,8 +1439,7 @@
               "Green": 255,
               "Blue": 255
             },
-            "BorderSize": 1,
-            "Alpha": 0
+            "BorderSize": 1
           },
           {
             "Type": "TextArea",
@@ -1509,8 +1507,7 @@
               "Green": 255,
               "Blue": 255
             },
-            "BorderSize": 1,
-            "Alpha": 0
+            "BorderSize": 1
           },
           {
             "Type": "TextArea",

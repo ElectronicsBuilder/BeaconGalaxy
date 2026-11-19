@@ -320,13 +320,13 @@
     </TextGroup>
   </Texts>
   <Typographies>
-    <Typography Id="small3" Font="verdana.ttf" Size="10" Bpp="1" Direction="LTR" FallbackCharacter="-" WidgetWildcardCharacters="0123456789 :APM" WildcardCharacterRanges="0-Z" IsVector="no" />
-    <Typography Id="small2" Font="verdana.ttf" Size="10" Bpp="1" Direction="LTR" FallbackCharacter="-" WildcardCharacterRanges="0-Z" IsVector="no" />
+    <Typography Id="small3" Font="verdana.ttf" Size="10" Bpp="1" Direction="LTR" FallbackCharacter="-" WidgetWildcardCharacters="0123456789 :APM" WildcardCharacterRanges="0-z" WildcardCharacters=" .-!()+," IsVector="no" />
+    <Typography Id="small2" Font="verdana.ttf" Size="10" Bpp="1" Direction="LTR" FallbackCharacter="-" WildcardCharacterRanges="0-z" WildcardCharacters=" .-!()+," IsVector="no" />
     <Typography Id="Default" Font="verdana.ttf" Size="20" Bpp="1" Direction="LTR" FallbackCharacter="?" IsVector="no" />
-    <Typography Id="Small" Font="verdana.ttf" Size="8" Bpp="1" Direction="LTR" FallbackCharacter="-" WildcardCharacterRanges="0-Z" IsVector="no" />
-    <Typography Id="scrollTextCenterSmall" Font="verdana.ttf" Size="10" Bpp="1" Direction="LTR" FallbackCharacter="-" WildcardCharacterRanges="a-z" IsVector="no" />
-    <Typography Id="scrollTextSmall" Font="verdana.ttf" Size="8" Bpp="1" Direction="LTR" FallbackCharacter="-" WildcardCharacterRanges="a-z" IsVector="no" />
+    <Typography Id="Small" Font="verdana.ttf" Size="8" Bpp="1" Direction="LTR" FallbackCharacter="-" WildcardCharacterRanges="0-z" WildcardCharacters=" .-!()+," IsVector="no" />
+    <Typography Id="scrollTextCenterSmall" Font="verdana.ttf" Size="10" Bpp="1" Direction="LTR" FallbackCharacter="-" WildcardCharacterRanges="0-z" WildcardCharacters=" .-!()+," IsVector="no" />
+    <Typography Id="scrollTextSmall" Font="verdana.ttf" Size="8" Bpp="1" Direction="LTR" FallbackCharacter="-" WildcardCharacterRanges="0-z" WildcardCharacters=" .-!()+," IsVector="no" />
     <Typography Id="Large" Font="verdana.ttf" Size="40" Bpp="1" Direction="LTR" FallbackCharacter="?" IsVector="no" />
-    <Typography Id="small4" Font="verdana.ttf" Size="7" Bpp="1" Direction="LTR" FallbackCharacter="-" WildcardCharacterRanges="0-Z" IsVector="no" />
+    <Typography Id="small4" Font="verdana.ttf" Size="7" Bpp="1" Direction="LTR" FallbackCharacter="-" WildcardCharacterRanges="0-z" WildcardCharacters=" .-!()+," IsVector="no" />
   </Typographies>
 </TextDatabase>

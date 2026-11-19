@@ -4,8 +4,20 @@ FONT_GLYPH_LOCATION_FLASH_PRAGMA
 KEEP extern const uint8_t unicodes_verdana_8_1bpp_0[] FONT_GLYPH_LOCATION_FLASH_ATTRIBUTE = {
     // Unicode: [0x0020, space]
     // (Has no glyph data)
+    // Unicode: [0x0021, exclam]
+    0x2F,
+    // Unicode: [0x0028, parenleft]
+    0x56, 0x95,
+    // Unicode: [0x0029, parenright]
+    0xA9, 0x5A,
+    // Unicode: [0x002B, plus]
+    0x84, 0x7C, 0x42, 0x00,
+    // Unicode: [0x002C, comma]
+    0x03,
     // Unicode: [0x002D, hyphen]
     0x03,
+    // Unicode: [0x002E, period]
+    0x01,
     // Unicode: [0x0030, zero]
     0x57, 0x99, 0x79,
     // Unicode: [0x0031, one]
@@ -92,6 +104,18 @@ KEEP extern const uint8_t unicodes_verdana_8_1bpp_0[] FONT_GLYPH_LOCATION_FLASH_
     0x51, 0x29, 0x42, 0x08,
     // Unicode: [0x005A, Z]
     0x1E, 0x21, 0x22, 0x3E,
+    // Unicode: [0x005B, bracketleft]
+    0x55, 0xD5,
+    // Unicode: [0x005C, backslash]
+    0x21, 0x22, 0x44, 0x08,
+    // Unicode: [0x005D, bracketright]
+    0xAB, 0xEA,
+    // Unicode: [0x005E, asciicircum]
+    0xA4, 0x09,
+    // Unicode: [0x005F, underscore]
+    0x07,
+    // Unicode: [0x0060, grave]
+    0x09,
     // Unicode: [0x0061, a]
     0xEE, 0xE9,
     // Unicode: [0x0062, b]
