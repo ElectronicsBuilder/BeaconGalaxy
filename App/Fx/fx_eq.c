@@ -4,8 +4,11 @@
  * Every 16 ms block (256 samples at 16 kHz): remove the DC offset, Hann
  * window, FFT, then 22 bands spaced logarithmically from 125 Hz to 8 kHz. Levels
  * are in dB against a slowly falling reference (automatic gain); anything below
- * the gate is treated as silence. Bars are blue with red peak dots (the
- * original colours), the VU meter green with a red top third.
+ * the gate is treated as silence. Both modes show the 22 bands, one per column
+ * (the original colours):
+ *   BARS  blue bars, red peak dot on the top of each bar
+ *   VU    blue bars turning red in the top third, peak dot floating above the
+ *         bar (red in the top third, blue below)
  */
 #include "fx_int.h"
 #include "fft.h"
@@ -96,17 +99,19 @@ static void P_DrawBars(const float *band_db)
   }
 }
 
-static void P_DrawVu(float db)
+static void P_DrawVu(const float *band_db)
 {
-  const Rgb low = Rgb_Make(0, 255, 0), high = Rgb_Make(255, 0, 0);
-  uint8_t h = P_Pixels(db);
-  height[0] = (h >= height[0]) ? h : (uint8_t)(height[0] - 1u);
-  P_Peak(0, height[0]);
+  const Rgb low = Rgb_Make(0, 0, 255), high = Rgb_Make(255, 0, 0);
+  const int top_zone = MX_H - MX_H / 3;          /* rows above this are red */
   Matrix_Clear();
-  for (int y = 0; y < height[0]; y++)
-    for (int x = 0; x < MX_W; x++) Matrix_Set(x, y, y >= MX_H - MX_H / 3 ? high : low);
-  if (peak[0] > 0)
-    for (int x = 0; x < MX_W; x++) Matrix_Set(x, peak[0] - 1, peak[0] > MX_H - MX_H / 3 ? high : low);
+  for (int b = 0; b < BANDS; b++)
+  {
+    uint8_t h = P_Pixels(band_db[b]);
+    height[b] = (h >= height[b]) ? h : (uint8_t)(height[b] - 1u);
+    P_Peak(b, height[b]);
+    for (int y = 0; y < height[b]; y++) Matrix_Set(b, y, y > top_zone ? high : low);
+    if (peak[b] > 0 && peak[b] < MX_H) Matrix_Set(b, peak[b], peak[b] > top_zone ? high : low);
+  }
 }
 
 static uint32_t P_Frame(uint32_t now)
@@ -125,24 +130,20 @@ static uint32_t P_Frame(uint32_t now)
     re[i] = v * window[i];
     im[i] = 0.0f;
   }
-  /* VU: RMS scaled like a full-scale bin so one gate works for both modes */
-  float rms_db = P_Db(sqrtf(energy / (float)N) * (float)N / 4.0f);
-  level_db = (int)rms_db;
+  /* overall level (console "fx"), scaled like a full-scale FFT bin so it compares with the gate */
+  level_db = (int)P_Db(sqrtf(energy / (float)N) * (float)N / 4.0f);
 
   float band_db[BANDS];
-  float loudest = rms_db;
-  if (mode == FX_EQ_BARS)
+  float loudest = 0.0f;
+  (void)Fft_Run(re, im, N);
+  Fft_Magnitude(re, im, re, N);
+  for (int b = 0; b < BANDS; b++)
   {
-    (void)Fft_Run(re, im, N);
-    Fft_Magnitude(re, im, re, N);
-    for (int b = 0; b < BANDS; b++)
-    {
-      unsigned lo = band_lo[b], hi = band_lo[b + 1];
-      float m = 0.0f;
-      for (unsigned k = lo; k <= hi && k < N / 2; k++) if (re[k] > m) m = re[k];
-      band_db[b] = P_Db(m);
-      if (b == 0 || band_db[b] > loudest) loudest = band_db[b];
-    }
+    unsigned lo = band_lo[b], hi = band_lo[b + 1];
+    float m = 0.0f;
+    for (unsigned k = lo; k <= hi && k < N / 2; k++) if (re[k] > m) m = re[k];
+    band_db[b] = P_Db(m);
+    if (b == 0 || band_db[b] > loudest) loudest = band_db[b];
   }
   /* automatic gain: follow the loudest value at once, fall back slowly */
   if (loudest > ref_db) ref_db = loudest;
@@ -150,7 +151,7 @@ static uint32_t P_Frame(uint32_t now)
   if (ref_db < (float)gate_db + RANGE_DB / 2.0f) ref_db = (float)gate_db + RANGE_DB / 2.0f;
 
   if (mode == FX_EQ_BARS) P_DrawBars(band_db);
-  else P_DrawVu(rms_db);
+  else P_DrawVu(band_db);
   return 2u;
 }
 
