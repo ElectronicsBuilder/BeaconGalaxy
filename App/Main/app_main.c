@@ -3,7 +3,7 @@
  *
  * Called from the CubeMX default task (Core/Src/freertos.c). The App task runs
  * every 2 ms: console input (USART1 and SWD), link input, buttons, commands
- * from the UI, heartbeat. The UI (TouchGFX) runs in its own task and talks to
+ * from the UI, status LEDs. The UI (TouchGFX) runs in its own task and talks to
  * the rest only through App/Ui/ui_bridge.h; the matrix renderer gets its own task.
  */
 #include "app_main.h"
@@ -23,6 +23,8 @@
 #include "settings.h"
 #include "gif_list.h"
 #include "ui_bridge.h"
+#include "fx.h"
+#include "status_leds.h"
 #include "app_touchgfx.h"
 #include "cmsis_os2.h"
 
@@ -98,16 +100,16 @@ void App_Init(void)
   Settings_Load();
   (void)GifList_Scan();
   Ui_Init();
+  Fx_Init();
+  StatusLeds_Init();
   Link_Init(P_LinkEvent);
   Link_Send(GX_HELLO, 0);
   P_StartGui();
-  Leds_Set(LED_G, 1);
 }
 
 void App_Run(void)
 {
   uint32_t next = osKernelGetTickCount();
-  uint32_t beat = 0;
   for (;;)
   {
     next += TICK_MS;
@@ -121,11 +123,6 @@ void App_Run(void)
     Link_Poll();
     Buttons_Poll(TICK_MS);        /* presses are read by the GUI (GalaxyButtonController) */
     Ui_Poll();
-
-    if (++beat >= 250u)           /* 0.5 s heartbeat */
-    {
-      beat = 0;
-      Leds_Toggle(LED_O);
-    }
+    StatusLeds_Poll(now);
   }
 }

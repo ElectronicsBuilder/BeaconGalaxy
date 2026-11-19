@@ -42,7 +42,6 @@ enum { AUTO_MAX_TIME, AUTO_COUNT };
 enum { EQ_COUNT = 2, COLORS_COUNT = 3 };
 
 extern const char* const MAIN_ITEMS[MAIN_COUNT];
-extern const char* const THEME_ITEMS[UI_THEME_COUNT];
 extern const char* const EQ_ITEMS[EQ_COUNT];
 extern const char* const COLOR_ITEMS[COLORS_COUNT];
 extern const char* const AUDIO_ITEMS[AUDIO_COUNT];

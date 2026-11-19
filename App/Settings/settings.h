@@ -24,7 +24,7 @@ typedef struct {
   uint8_t autoplay_max_min;     /* auto GIF/theme: change every 1..N minutes (random) */
   uint8_t led_effect;           /* 0..1 */
   uint8_t led_delay;            /* 10..100 ms */
-  uint8_t led_dma;              /* matrix output on/off */
+  uint8_t led_dma;              /* 1: blue status LED shows matrix transfers */
   uint8_t repeat;               /* audio repeat on/off */
   uint8_t auto_wav_random;      /* autoplay order: 0 = sequential, 1 = random */
   uint8_t auto_gif_random;

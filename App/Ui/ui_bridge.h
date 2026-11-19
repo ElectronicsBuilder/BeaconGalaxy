@@ -43,7 +43,9 @@ typedef enum {
   UI_REBOOT,
 } UiCmdId;
 
-enum { UI_THEME_FIRE, UI_THEME_METEOR, UI_THEME_BOUNCING, UI_THEME_4, UI_THEME_5, UI_THEME_COUNT };
+/* Themes, in menu order (the matrix effects in App/Fx) */
+enum { UI_THEME_FIRE, UI_THEME_METEOR, UI_THEME_BOUNCING, UI_THEME_PLASMA, UI_THEME_STARS,
+       UI_THEME_RAIN, UI_THEME_SWIRL, UI_THEME_LIFE, UI_THEME_COUNT };
 enum { UI_EQ_BARS, UI_EQ_VU };
 
 typedef enum {
@@ -70,6 +72,7 @@ unsigned Ui_TrackCount(void);
 const char *Ui_TrackName(unsigned i);         /* "" if unknown */
 unsigned Ui_GifCount(void);
 const char *Ui_GifName(unsigned i);
+const char *Ui_ThemeName(unsigned i);
 UiUpgrade Ui_UpgradeState(void);
 uint32_t Ui_WaveEnds(void);                   /* increments on every WAVEEND from the audio board */
 uint32_t Ui_Random(uint32_t n);               /* 0..n-1 (0 if n == 0) */

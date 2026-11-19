@@ -8,6 +8,7 @@
 #include "link.h"
 #include "settings.h"
 #include "gif_list.h"
+#include "fx.h"
 #include "eeprom.h"
 #include "sdcard.h"
 #include "log.h"
@@ -21,7 +22,8 @@
 #define REBOOT_DELAY_MS  1000u
 
 static const uint8_t boot_fuse[3] = { 0xF0, 0x00, 0x0A };   /* GalaxyBoot: "update from SD" */
-static const char *const theme_names[UI_THEME_COUNT] = { "FIRE", "METEOR", "BOUNCING", "THEME4", "THEME5" };
+_Static_assert((int)UI_THEME_COUNT == (int)FX_THEME_COUNT, "UI and fx theme lists differ");
+_Static_assert((int)UI_EQ_VU == (int)FX_EQ_VU, "UI and fx equalizer modes differ");
 
 static osMessageQueueId_t queue;
 static volatile UiUpgrade upgrade = UI_UPG_IDLE;
@@ -76,6 +78,11 @@ unsigned Ui_GifCount(void)
 const char *Ui_GifName(unsigned i)
 {
   return GifList_Name(i);
+}
+
+const char *Ui_ThemeName(unsigned i)
+{
+  return Fx_ThemeName((int)i);
 }
 
 UiUpgrade Ui_UpgradeState(void)
@@ -140,16 +147,25 @@ static void P_Execute(const UiCmd *c)
   Settings *s = Settings_Get();
   switch (c->id)
   {
-    /* matrix: the renderer arrives with the WS2812 driver; log for now */
-    case UI_GIF_PLAY:      LOG_I("ui: play GIF %s", Ui_GifName((unsigned)c->a)); break;
-    case UI_GIF_STOP:      LOG_I("ui: stop GIF"); break;
-    case UI_THEME_PLAY:
-      LOG_I("ui: theme %s", (c->a >= 0 && c->a < UI_THEME_COUNT) ? theme_names[c->a] : "?");
+    /* matrix: the fx task owns it; a new request replaces whatever runs */
+    case UI_GIF_PLAY:
+      LOG_I("ui: GIF %s", Ui_GifName((unsigned)c->a));
+      (void)Fx_Request(FX_GIF, c->a);
       break;
-    case UI_THEME_STOP:    LOG_I("ui: stop theme"); break;
-    case UI_EQ_START:      LOG_I("ui: equalizer %s", c->a == UI_EQ_VU ? "VU meter" : "bars"); break;
-    case UI_EQ_STOP:       LOG_I("ui: stop equalizer"); break;
-    case UI_COLOR_PREVIEW: LOG_I("ui: colour %u %u %u", s->red, s->green, s->blue); break;
+    case UI_THEME_PLAY:
+      LOG_I("ui: theme %s", Fx_ThemeName((int)c->a));
+      (void)Fx_Request(FX_THEME, c->a);
+      break;
+    case UI_EQ_START:
+      LOG_I("ui: %s", c->a == UI_EQ_VU ? "VU meter" : "equalizer");
+      (void)Fx_Request(FX_EQ, c->a);
+      break;
+    case UI_GIF_STOP:
+    case UI_THEME_STOP:
+    case UI_EQ_STOP:
+      (void)Fx_Request(FX_OFF, 0);
+      break;
+    case UI_COLOR_PREVIEW: (void)Fx_Request(FX_COLOR, 0); break;
 
     case UI_SETTINGS_SAVE: (void)Settings_Save(); break;
 

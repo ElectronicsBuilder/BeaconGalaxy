@@ -40,7 +40,7 @@ void AutothemeView::play(unsigned index)
         index = 0;
     }
     position = index;
-    ui::setText(textArea2Buffer, TEXTAREA2_SIZE, ui::THEME_ITEMS[index]);
+    ui::setText(textArea2Buffer, TEXTAREA2_SIZE, Ui_ThemeName(index));
     textArea2.invalidate();
     Ui_Post(UI_THEME_STOP, 0);
     Ui_Post(UI_THEME_PLAY, static_cast<int32_t>(index));

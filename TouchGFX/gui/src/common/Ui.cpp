@@ -9,7 +9,6 @@ namespace ui
 {
 
 const char* const MAIN_ITEMS[MAIN_COUNT] = { "THEMES", "PLAY GIFS", "EQUALIZER", "COLORS", "AUDIO", "SETTINGS", "ABOUT" };
-const char* const THEME_ITEMS[UI_THEME_COUNT] = { "FIRE", "METEOR", "BOUNCING", "THEME4", "THEME5" };
 const char* const EQ_ITEMS[EQ_COUNT] = { "EQ BARS", "VU METER" };
 const char* const COLOR_ITEMS[COLORS_COUNT] = { "CL RED", "CL GREEN", "CL BLUE" };
 const char* const AUDIO_ITEMS[AUDIO_COUNT] = { "PLAYLIST", "RECORD", "VOLUME", "STOP", "START", "REPEAT" };

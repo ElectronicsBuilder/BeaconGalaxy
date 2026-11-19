@@ -30,7 +30,7 @@ void themesView::handleKeyEvent(uint8_t key)
     {
         const uint16_t i = ui::cursor[ui::MENU_THEMES];
         ui::page.owner = ui::PAGE_THEME;
-        ui::copy(ui::page.title, sizeof ui::page.title, ui::THEME_ITEMS[i]);
+        ui::copy(ui::page.title, sizeof ui::page.title, Ui_ThemeName(i));
         Ui_Post(UI_THEME_PLAY, i);
         application().gotopageScreenNoTransition();
     }

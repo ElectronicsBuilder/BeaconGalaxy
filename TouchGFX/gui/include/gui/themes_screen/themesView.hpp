@@ -15,12 +15,12 @@ public:
 
     virtual void scrollWheel1UpdateItem(TextContainer& item, int16_t itemIndex)
     {
-        item.setText(ui::THEME_ITEMS[itemIndex]);
+        item.setText(Ui_ThemeName(itemIndex));
     }
 
     virtual void scrollWheel1UpdateCenterItem(TextCenterContainer& item, int16_t itemIndex)
     {
-        item.setText(ui::THEME_ITEMS[itemIndex]);
+        item.setText(Ui_ThemeName(itemIndex));
     }
 };
 

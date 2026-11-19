@@ -14,6 +14,12 @@
 #include "eeprom.h"
 #include "sdcard.h"
 #include "link.h"
+#include "status_leds.h"
+#include "fx.h"
+#include "gif_list.h"
+#include "ws2812.h"
+#include "mic.h"
+#include <strings.h>
 #include "ff.h"
 #include "cmsis_os2.h"
 #include "FreeRTOS.h"
@@ -146,6 +152,7 @@ static int C_Led(int argc, char **argv)
   if (argc < 3) return Cli_Error("usage: led green|orange|red|blue on|off");
   int led = Leds_FromName(argv[1]);
   if (led < 0) return Cli_Error("unknown led");
+  StatusLeds_Hold(10000u);       /* keep the LED effect off them for 10 s */
   Leds_Set((Led)led, strcmp(argv[2], "on") == 0);
   return 0;
 }
@@ -276,6 +283,79 @@ static int C_Reset(int argc, char **argv)
   return 0;
 }
 
+/* index from a number or a name; -1 if neither */
+static int P_FindIndex(const char *arg, unsigned count, const char *(*name)(unsigned))
+{
+  long v;
+  if (Cli_ParseInt(arg, 0, (long)count - 1, &v) == 0) return (int)v;
+  for (unsigned i = 0; i < count; i++)
+    if (strcasecmp(arg, name(i)) == 0) return (int)i;
+  return -1;
+}
+
+static const char *P_ThemeName(unsigned i) { return Fx_ThemeName((int)i); }
+
+static int C_Fx(int argc, char **argv)
+{
+  if (argc < 2)
+  {
+    FxStatus st;
+    unsigned long frames, irqs;
+    Fx_GetStatus(&st);
+    Ws2812_Stats(&frames, &irqs);
+    Cli_Printf("effect=%s %ld", Fx_KindName(st.kind), (long)st.arg);
+    Cli_Printf("frames=%lu errors=%lu last_frame_ms=%lu", st.frames, st.errors, (unsigned long)st.last_frame_ms);
+    Cli_Printf("ws2812_frames=%lu ws2812_irqs=%lu", frames, irqs);
+    uint32_t om, rm;
+    Fx_GifTiming(&om, &rm);
+    Cli_Printf("gif_open_ms=%lu gif_read_ms=%lu", (unsigned long)om, (unsigned long)rm);
+    Cli_Printf("mic_blocks=%lu level_db=%d gate_db=%d", Mic_Blocks(), Fx_EqLevel(), Fx_EqGate());
+    return 0;
+  }
+  const char *sub = argv[1];
+  if (strcmp(sub, "off") == 0) return Fx_Request(FX_OFF, 0);
+  if (strcmp(sub, "color") == 0) return Fx_Request(FX_COLOR, 0);
+  if (strcmp(sub, "test") == 0)
+  {
+    long n = 0;
+    if (argc > 2 && Cli_ParseInt(argv[2], 0, 2, &n) != 0) return Cli_Error("test 0 (chain walk) | 1 (orientation) | 2 (rainbow)");
+    return Fx_Request(FX_TEST, n);
+  }
+  if (strcmp(sub, "gif") == 0)
+  {
+    if (argc < 3)
+    {
+      for (unsigned i = 0; i < GifList_Count(); i++) Cli_Printf("%u %s %u", i, GifList_Name(i), GifList_Frames(i));
+      return 0;
+    }
+    int i = P_FindIndex(argv[2], GifList_Count(), GifList_Name);
+    return i < 0 ? Cli_Error("no such GIF") : Fx_Request(FX_GIF, i);
+  }
+  if (strcmp(sub, "theme") == 0)
+  {
+    if (argc < 3)
+    {
+      for (int i = 0; i < FX_THEME_COUNT; i++) Cli_Printf("%d %s", i, Fx_ThemeName(i));
+      return 0;
+    }
+    int i = P_FindIndex(argv[2], FX_THEME_COUNT, P_ThemeName);
+    return i < 0 ? Cli_Error("no such theme") : Fx_Request(FX_THEME, i);
+  }
+  if (strcmp(sub, "eq") == 0)
+  {
+    int vu = argc > 2 && strcmp(argv[2], "vu") == 0;
+    return Fx_Request(FX_EQ, vu ? FX_EQ_VU : FX_EQ_BARS);
+  }
+  if (strcmp(sub, "gate") == 0)
+  {
+    long db;
+    if (argc < 3 || Cli_ParseInt(argv[2], 0, 120, &db) != 0) return Cli_Error("gate <dB 0..120>");
+    Fx_EqSetGate((int)db);
+    return 0;
+  }
+  return Cli_Error("unknown fx command");
+}
+
 static const CliCommand commands[] = {
   { "ver",      "",                   "firmware version", C_Ver, NULL },
   { "i2cscan",  "",                   "list I2C2 devices", C_I2cScan, NULL },
@@ -289,6 +369,15 @@ static const CliCommand commands[] = {
     "sd mount              mount again (after a card change)" },
   { "key",      "up|down|back|enter", "press a front button", C_Key, NULL },
   { "led",      "<color> on|off",     "status LEDs", C_Led, NULL },
+  { "fx",       "[off|color|gif|theme|eq|test|gate] ...", "LED matrix effects", C_Fx,
+    "fx                 status\n"
+    "fx gif [name|n]    list the GIFs / play one\n"
+    "fx theme [name|n]  list the themes / run one\n"
+    "fx eq [bars|vu]    equalizer from the microphone\n"
+    "fx gate <dB>       equalizer noise gate\n"
+    "fx color           the Colors setting, full level\n"
+    "fx test [0|1|2]    chain walk / orientation / rainbow\n"
+    "fx off" },
   { "oled",     "[pattern]",          "OLED test: border|fill|checker|clear|contrast <n>", C_Oled, NULL },
   { "gx",       "<GALAXY...>",        "send a raw line to the audio board", C_Gx,
     "gx GALAXYHELLO\n"
