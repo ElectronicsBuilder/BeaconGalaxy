@@ -237,6 +237,9 @@
         <Translation Language="GB">SEARCHING&#10;</Translation>
       </Text>
       <Text Id="__SingleUse_OKO4" TypographyId="small2" Alignment="Center">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_SDST" TypographyId="small2" Alignment="Left">
         <Translation Language="GB">IDLE</Translation>
       </Text>
       <Text Id="__SingleUse_A3PZ" TypographyId="scrollTextSmall" Alignment="Center">

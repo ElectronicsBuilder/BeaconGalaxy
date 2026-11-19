@@ -34,9 +34,11 @@ screenViewBase::screenViewBase()
     textArea1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_TR9H));
     add(textArea1);
 
-    textArea2.setXY(21, 11);
+    textArea2.setPosition(12, 11, 40, 13);
     textArea2.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     textArea2.setLinespacing(0);
+    Unicode::snprintf(textArea2Buffer, TEXTAREA2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_SDST).getText());
+    textArea2.setWildcard(textArea2Buffer);
     textArea2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_OKO4));
     add(textArea2);
 

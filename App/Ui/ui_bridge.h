@@ -76,6 +76,7 @@ const char *Ui_ThemeName(unsigned i);
 UiUpgrade Ui_UpgradeState(void);
 uint32_t Ui_WaveEnds(void);                   /* increments on every WAVEEND from the audio board */
 uint32_t Ui_Random(uint32_t n);               /* 0..n-1 (0 if n == 0) */
+int      Ui_SdMissing(void);     /* no SD card answered for a while */
 uint32_t Ui_Millis(void);
 
 /* App side */

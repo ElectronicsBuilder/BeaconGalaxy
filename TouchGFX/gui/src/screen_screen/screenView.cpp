@@ -1,7 +1,7 @@
 #include <gui/screen_screen/screenView.hpp>
 #include <gui/common/Ui.hpp>
 
-screenView::screenView() : lastSecond(0xFFFFFFFFu)
+screenView::screenView() : lastSecond(0xFFFFFFFFu), sdMissing(-1)
 {
 }
 
@@ -9,6 +9,7 @@ void screenView::setupScreen()
 {
     screenViewBase::setupScreen();
     circle1.setVisible(Ui_PlaylistComplete() != 0);
+    showStatus();
     showTime();
 }
 
@@ -37,8 +38,21 @@ void screenView::showTime()
     }
 }
 
+void screenView::showStatus()
+{
+    const int missing = Ui_SdMissing() != 0;
+    if (missing == sdMissing)
+    {
+        return;
+    }
+    sdMissing = missing;
+    ui::setText(textArea2Buffer, TEXTAREA2_SIZE, missing ? "NO SD" : "IDLE");
+    textArea2.invalidate();
+}
+
 void screenView::handleTickEvent()
 {
+    showStatus();
     showTime();
 }
 

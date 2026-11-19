@@ -35,7 +35,7 @@ protected:
     touchgfx::BoxWithBorder boxWithBorder1;
     touchgfx::DigitalClock digitalClock;
     touchgfx::TextArea textArea1;
-    touchgfx::TextArea textArea2;
+    touchgfx::TextAreaWithOneWildcard textArea2;
     touchgfx::TextArea textArea3;
     touchgfx::TextAreaWithOneWildcard textArea4;
     touchgfx::Circle circle1;
@@ -44,6 +44,8 @@ protected:
     /*
      * Wildcard Buffers
      */
+    static const uint16_t TEXTAREA2_SIZE = 8;
+    touchgfx::Unicode::UnicodeChar textArea2Buffer[TEXTAREA2_SIZE];
     static const uint16_t TEXTAREA4_SIZE = 4;
     touchgfx::Unicode::UnicodeChar textArea4Buffer[TEXTAREA4_SIZE];
 

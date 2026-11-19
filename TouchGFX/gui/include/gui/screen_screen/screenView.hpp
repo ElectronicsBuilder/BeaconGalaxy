@@ -5,7 +5,7 @@
 #include <gui/screen_screen/screenPresenter.hpp>
 
 /* Start screen: uptime clock, days counter, "ready" dot once the audio board
- * has sent its playlist. ENTER = menu; UP / BACK / DOWN = autoplay WAVs / GIFs / themes. */
+ * has sent its playlist, status line (IDLE, or NO SD while no card answers). ENTER = menu; UP / BACK / DOWN = autoplay WAVs / GIFs / themes. */
 class screenView : public screenViewBase
 {
 public:
@@ -18,7 +18,9 @@ public:
 
 protected:
     void showTime();
+    void showStatus();
     uint32_t lastSecond;
+    int sdMissing;
 };
 
 #endif // SCREENVIEW_HPP

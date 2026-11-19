@@ -54,9 +54,9 @@
           {
             "Type": "TextArea",
             "Name": "textArea2",
-            "X": 21,
+            "X": 12,
             "Y": 11,
-            "Width": 24,
+            "Width": 40,
             "Height": 13,
             "TextId": "__SingleUse_OKO4",
             "TextRotation": "0",
@@ -65,7 +65,11 @@
               "Green": 255,
               "Blue": 255
             },
-            "AutoSize": true
+            "Wildcard1": {
+              "TextId": "__SingleUse_SDST",
+              "UseBuffer": true,
+              "BufferSize": 8
+            }
           },
           {
             "Type": "TextArea",

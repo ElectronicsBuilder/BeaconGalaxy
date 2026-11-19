@@ -118,6 +118,78 @@ static void P_LinkSupervise(uint32_t now)
   }
 }
 
+/* SD card without a detect switch (see sdcard.h): every 2 s the card is asked
+ * for its status; when that or an access fails, stop
+ * what uses the card and unmount; while there is no card, try to mount every
+ * 2 s, quietly. After 10 s without a card the start screen shows NO SD and the
+ * console says so (again every 5 minutes); a card that answers is mounted and
+ * its GIFs are scanned. */
+#define SD_RETRY_MS     2000u
+#define SD_MISSING_MS   10000u
+#define SD_REMIND_MS    300000u
+
+static uint32_t sd_lost_at, sd_retry_at, sd_told_at;
+
+static void P_SdLost(uint32_t now)
+{
+  FxStatus fx;
+  Fx_GetStatus(&fx);
+  if (fx.kind == FX_GIF)
+  {
+    (void)Fx_Request(FX_OFF, 0);                 /* nothing may read the card while it is unmounted */
+    for (int i = 0; i < 50; i++)
+    {
+      osDelay(5);
+      Fx_GetStatus(&fx);
+      if (fx.kind != FX_GIF) break;
+    }
+  }
+  Sd_Unmount();
+  (void)GifList_Scan();                          /* empty while there is no card */
+  sd_lost_at = now;
+  sd_retry_at = now + SD_RETRY_MS;
+  sd_told_at = 0;
+}
+
+static void P_SdSupervise(uint32_t now)
+{
+  if (Sd_TakeError() && Sd_IsMounted())
+  {
+    LOG_W("SD card stopped answering (removed?)");
+    P_SdLost(now);
+    return;
+  }
+  if ((int32_t)(now - sd_retry_at) < 0) return;
+  sd_retry_at = now + SD_RETRY_MS;
+  if (Sd_IsMounted())
+  {
+    if (Sd_Probe() != 0)                          /* pulled out while nothing was reading it */
+    {
+      LOG_W("SD card removed");
+      P_SdLost(now);
+    }
+    return;
+  }
+  if (Sd_MountQuiet() == 0)
+  {
+    LOG_I("SD card found");
+    Sd_SetMissing(0);
+    (void)GifList_Scan();
+  if (!Sd_IsMounted())
+  {
+    sd_lost_at = osKernelGetTickCount();          /* no card at boot: keep looking */
+    sd_retry_at = sd_lost_at + SD_RETRY_MS;
+  }
+    return;
+  }
+  if (now - sd_lost_at >= SD_MISSING_MS && (sd_told_at == 0 || now - sd_told_at >= SD_REMIND_MS))
+  {
+    LOG_W("no SD card: insert one (GIFs and upgrades need it); checking every %u s", SD_RETRY_MS / 1000u);
+    Sd_SetMissing(1);
+    sd_told_at = now ? now : 1u;
+  }
+}
+
 static void P_StartGui(void)
 {
   static const osThreadAttr_t attr = {
@@ -176,5 +248,6 @@ void App_Run(void)
     Buttons_Poll(TICK_MS);        /* presses are read by the GUI (GalaxyButtonController) */
     Ui_Poll();
     StatusLeds_Poll(now);
+    P_SdSupervise(now);
   }
 }

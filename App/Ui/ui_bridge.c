@@ -103,6 +103,11 @@ uint32_t Ui_Random(uint32_t n)
   return r % n;
 }
 
+int Ui_SdMissing(void)
+{
+  return Sd_Missing();
+}
+
 uint32_t Ui_Millis(void)
 {
   return osKernelGetTickCount();
@@ -127,7 +132,7 @@ static void P_UpgradeCheck(void)
   upgrade = UI_UPG_CHECKING;
   strcpy(path, Sd_Root());
   strcat(path, UI_UPGRADE_FILE);
-  int found = Sd_IsMounted() && f_stat(path, &fi) == FR_OK && fi.fsize > 0;
+  int found = Sd_IsMounted() && Sd_Check(f_stat(path, &fi)) == FR_OK && fi.fsize > 0;
   LOG_I("upgrade: %s %s", UI_UPGRADE_FILE, found ? "found" : "not found");
   upgrade = found ? UI_UPG_FILE_FOUND : UI_UPG_NO_FILE;
 }

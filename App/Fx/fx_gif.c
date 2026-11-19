@@ -88,7 +88,7 @@ static void P_Index(void)
   memset(loc, 0, sizeof loc);
   indexed = 0;
   const char *name = GifList_Name(gif);
-  if (f_opendir(&dir, Sd_Root()) != FR_OK) return;
+  if (Sd_Check(f_opendir(&dir, Sd_Root())) != FR_OK) return;
   vol = dir.obj.fs;
   vol_id = vol->id;
   while (f_readdir(&dir, &fno) == FR_OK && fno.fname[0])
@@ -121,7 +121,7 @@ static int P_Open(unsigned n, int *by_index)
   }
   char path[GIF_NAME_MAX + 24];
   snprintf(path, sizeof path, "%s%s-%u.bmp", Sd_Root(), GifList_Name(gif), n);
-  return f_open(&file, path, FA_READ) == FR_OK ? 0 : -1;
+  return Sd_Check(f_open(&file, path, FA_READ)) == FR_OK ? 0 : -1;
 }
 
 static void P_Close(int by_index)
@@ -141,7 +141,7 @@ static int P_DrawFrame(unsigned n)
   uint32_t t1 = osKernelGetTickCount();
   open_ms = t1 - t0;
   int rc = -2;
-  if (f_read(&file, hdr, sizeof hdr, &got) == FR_OK)
+  if (Sd_Check(f_read(&file, hdr, sizeof hdr, &got)) == FR_OK)
   {
     int e = Bmp_Parse(hdr, got, &bi);
     if (e != 0)
@@ -154,8 +154,8 @@ static int P_DrawFrame(unsigned n)
       for (int y = 0; y < MX_H && rc == 0; y++)
       {
         int32_t sy = Bmp_SourceIndex(y, MX_H, bi.height);    /* y counts from the top here */
-        if (f_lseek(&file, Bmp_RowOffset(&bi, sy)) != FR_OK ||
-            f_read(&file, row, bi.stride, &got) != FR_OK || got != bi.stride)
+        if (Sd_Check(f_lseek(&file, Bmp_RowOffset(&bi, sy))) != FR_OK ||
+            Sd_Check(f_read(&file, row, bi.stride, &got)) != FR_OK || got != bi.stride)
         {
           rc = -3;
           break;

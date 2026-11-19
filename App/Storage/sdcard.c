@@ -7,8 +7,15 @@
 #include "sdio.h"
 
 static int mounted;
+static volatile int error_noted;
+static volatile int missing;
 
-int Sd_Mount(void)
+static int P_Mount(int quiet);
+
+int Sd_Mount(void)      { return P_Mount(0); }
+int Sd_MountQuiet(void) { return P_Mount(1); }
+
+static int P_Mount(int quiet)
 {
   if (mounted) return 0;
   FRESULT r = f_mount(&SDFatFS, SDPath, 1);
@@ -21,7 +28,7 @@ int Sd_Mount(void)
   }
   if (r != FR_OK)
   {
-    LOG_W("SD card: mount failed (%d)", (int)r);
+    if (!quiet) LOG_W("SD card: mount failed (%d)", (int)r);
     return -1;
   }
   mounted = 1;
@@ -37,6 +44,32 @@ void Sd_Unmount(void)
   f_mount(NULL, SDPath, 0);
   mounted = 0;
 }
+
+int Sd_Check(int fresult)
+{
+  if (fresult == FR_DISK_ERR || fresult == FR_NOT_READY) error_noted = 1;
+  return fresult;
+}
+
+int Sd_TakeError(void)
+{
+  if (!error_noted) return 0;
+  error_noted = 0;
+  return 1;
+}
+
+int Sd_Probe(void)
+{
+  if (!mounted) return -1;
+  if (!ff_req_grant(SDFatFS.sobj)) return 0;          /* busy for long: someone is using it, so it is there */
+  HAL_SD_CardStateTypeDef st = HAL_SD_GetCardState(&hsd);
+  ff_rel_grant(SDFatFS.sobj);
+  return (st == HAL_SD_CARD_TRANSFER || st == HAL_SD_CARD_SENDING || st == HAL_SD_CARD_RECEIVING ||
+          st == HAL_SD_CARD_PROGRAMMING) ? 0 : -1;
+}
+
+void Sd_SetMissing(int m) { missing = m; }
+int  Sd_Missing(void)     { return missing; }
 
 int Sd_Info(uint32_t *total_kb, uint32_t *free_kb)
 {
