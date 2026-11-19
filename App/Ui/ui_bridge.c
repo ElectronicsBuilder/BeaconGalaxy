@@ -9,6 +9,7 @@
 #include "settings.h"
 #include "gif_list.h"
 #include "fx.h"
+#include "status_leds.h"
 #include "eeprom.h"
 #include "boot_fuse.h"
 #include "sdcard.h"
@@ -101,6 +102,16 @@ uint32_t Ui_Random(uint32_t n)
   if (n == 0) return 0;
   if (HAL_RNG_GenerateRandomNumber(&hrng, &r) != HAL_OK) r = osKernelGetTickCount() * 2654435761u;
   return r % n;
+}
+
+unsigned Ui_LedEffectCount(void)
+{
+  return LED_FX_COUNT;
+}
+
+const char *Ui_LedEffectName(unsigned i)
+{
+  return StatusLeds_EffectName(i);
 }
 
 int Ui_SdMissing(void)

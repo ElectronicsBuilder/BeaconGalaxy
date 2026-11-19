@@ -130,20 +130,14 @@ static void P_LinkSupervise(uint32_t now)
 
 static uint32_t sd_lost_at, sd_retry_at, sd_told_at;
 
+/* The card is marked lost (no new accesses start). Unmount only once the GIF
+ * player has really stopped: unmounting deletes the FatFs volume lock, and a
+ * read still waiting inside FatFs would then fault. */
 static void P_SdLost(uint32_t now)
 {
   FxStatus fx;
   Fx_GetStatus(&fx);
-  if (fx.kind == FX_GIF)
-  {
-    (void)Fx_Request(FX_OFF, 0);                 /* nothing may read the card while it is unmounted */
-    for (int i = 0; i < 50; i++)
-    {
-      osDelay(5);
-      Fx_GetStatus(&fx);
-      if (fx.kind != FX_GIF) break;
-    }
-  }
+  if (fx.kind == FX_GIF) return;                 /* it ends by itself (Sd_IsMounted() is false); check again later */
   Sd_Unmount();
   (void)GifList_Scan();                          /* empty while there is no card */
   sd_lost_at = now;
@@ -153,9 +147,9 @@ static void P_SdLost(uint32_t now)
 
 static void P_SdSupervise(uint32_t now)
 {
-  if (Sd_TakeError() && Sd_IsMounted())
+  if (Sd_TakeError()) LOG_W("SD card stopped answering (removed?)");
+  if (Sd_Lost())
   {
-    LOG_W("SD card stopped answering (removed?)");
     P_SdLost(now);
     return;
   }
@@ -163,11 +157,7 @@ static void P_SdSupervise(uint32_t now)
   sd_retry_at = now + SD_RETRY_MS;
   if (Sd_IsMounted())
   {
-    if (Sd_Probe() != 0)                          /* pulled out while nothing was reading it */
-    {
-      LOG_W("SD card removed");
-      P_SdLost(now);
-    }
+    if (Sd_Probe() != 0) LOG_W("SD card removed");   /* pulled out while nothing was reading it */
     return;
   }
   if (Sd_MountQuiet() == 0)

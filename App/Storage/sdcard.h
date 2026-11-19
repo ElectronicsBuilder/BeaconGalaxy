@@ -14,7 +14,8 @@
 
 int  Sd_Mount(void);              /* 0 = mounted */
 int  Sd_MountQuiet(void);         /* same, no warning when there is no card */
-int  Sd_IsMounted(void);
+int  Sd_IsMounted(void);          /* mounted and answering: safe to start an access */
+int  Sd_Lost(void);               /* still mounted, but stopped answering: App task unmounts */
 const char *Sd_Root(void);         /* "0:/" */
 void Sd_Unmount(void);
 int  Sd_Info(uint32_t *total_kb, uint32_t *free_kb);

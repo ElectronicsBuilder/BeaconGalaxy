@@ -190,6 +190,7 @@ static int P_Start(int32_t arg)
 static uint32_t P_Frame(uint32_t now)
 {
   (void)now;
+  if (!Sd_IsMounted()) return FX_END;          /* card gone: stop (the App task unmounts it) */
   int rc = P_DrawFrame(frame);
   frame = (frame + 1u < frames) ? frame + 1u : 0u;
 

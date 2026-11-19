@@ -131,6 +131,11 @@ const Diskio_drvTypeDef  SD_Driver =
 
 /* USER CODE BEGIN beforeFunctionSection */
 /* can be used to modify / undefine following code or add new code */
+/* BeaconGalaxy: the board has no card-detect pin, so a card pulled out during
+ * a transfer is only noticed by the transfer never ending; do not keep the
+ * reader (and the FatFs volume lock) for 30 s. A frame needs a few ms. */
+#undef SD_TIMEOUT
+#define SD_TIMEOUT 2000
 /* USER CODE END beforeFunctionSection */
 
 /* Private functions ---------------------------------------------------------*/
@@ -676,6 +681,14 @@ void BSP_SD_AbortCallback(void)
 #endif
 }
 */
+/* BeaconGalaxy: a transfer error wakes the waiting SD_read()/SD_write() at once
+ * (any message other than READ/WRITE_CPLT_MSG makes them return RES_ERROR). */
+void HAL_SD_ErrorCallback(SD_HandleTypeDef *hsd)
+{
+  (void)hsd;
+  const uint16_t msg = 3;   /* RW_ERROR_MSG */
+  osMessageQueuePut(SDQueueID, (const void *)&msg, 0, 0);
+}
 /* USER CODE END ErrorAbortCallbacks */
 
 /* USER CODE BEGIN lastSection */

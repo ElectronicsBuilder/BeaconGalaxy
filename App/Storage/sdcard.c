@@ -6,7 +6,8 @@
 #include "log.h"
 #include "sdio.h"
 
-static int mounted;
+static int mounted;              /* FatFs volume mounted (only the App task changes it) */
+static volatile int lost;        /* card stopped answering: nobody may start new accesses */
 static volatile int error_noted;
 static volatile int missing;
 
@@ -35,7 +36,8 @@ static int P_Mount(int quiet)
   return 0;
 }
 
-int Sd_IsMounted(void) { return mounted; }
+int Sd_IsMounted(void) { return mounted && !lost; }
+int Sd_Lost(void)      { return mounted && lost; }
 const char *Sd_Root(void) { return SDPath; }
 
 void Sd_Unmount(void)
@@ -43,11 +45,16 @@ void Sd_Unmount(void)
   if (!mounted) return;
   f_mount(NULL, SDPath, 0);
   mounted = 0;
+  lost = 0;
 }
 
 int Sd_Check(int fresult)
 {
-  if (fresult == FR_DISK_ERR || fresult == FR_NOT_READY) error_noted = 1;
+  if (fresult == FR_DISK_ERR || fresult == FR_NOT_READY)
+  {
+    lost = 1;
+    error_noted = 1;
+  }
   return fresult;
 }
 
@@ -60,12 +67,14 @@ int Sd_TakeError(void)
 
 int Sd_Probe(void)
 {
-  if (!mounted) return -1;
+  if (!Sd_IsMounted()) return -1;
   if (!ff_req_grant(SDFatFS.sobj)) return 0;          /* busy for long: someone is using it, so it is there */
   HAL_SD_CardStateTypeDef st = HAL_SD_GetCardState(&hsd);
   ff_rel_grant(SDFatFS.sobj);
-  return (st == HAL_SD_CARD_TRANSFER || st == HAL_SD_CARD_SENDING || st == HAL_SD_CARD_RECEIVING ||
-          st == HAL_SD_CARD_PROGRAMMING) ? 0 : -1;
+  if (st == HAL_SD_CARD_TRANSFER || st == HAL_SD_CARD_SENDING || st == HAL_SD_CARD_RECEIVING ||
+      st == HAL_SD_CARD_PROGRAMMING) return 0;
+  lost = 1;
+  return -1;
 }
 
 void Sd_SetMissing(int m) { missing = m; }
@@ -75,7 +84,7 @@ int Sd_Info(uint32_t *total_kb, uint32_t *free_kb)
 {
   FATFS *fs;
   DWORD free_clusters;
-  if (!mounted || f_getfree(SDPath, &free_clusters, &fs) != FR_OK) return -1;
+  if (!Sd_IsMounted() || Sd_Check(f_getfree(SDPath, &free_clusters, &fs)) != FR_OK) return -1;
   uint32_t kb_per_cluster = fs->csize / 2u;     /* 512-byte sectors */
   *total_kb = (uint32_t)(fs->n_fatent - 2u) * kb_per_cluster;
   *free_kb = (uint32_t)free_clusters * kb_per_cluster;

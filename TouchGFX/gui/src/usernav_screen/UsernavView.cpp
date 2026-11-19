@@ -75,7 +75,7 @@ void UsernavView::handleKeyEvent(uint8_t key)
         switch (i)
         {
         case ui::LEDS_DMA:    ui::setEdit(ui::ED_LED_DMA, "DMA LEDS", "STAT"); break;
-        case ui::LEDS_EFFECT: ui::setEdit(ui::ED_LED_EFFECT, "EFFECTS", "NUMB"); break;
+        case ui::LEDS_EFFECT: ui::setEdit(ui::ED_LED_EFFECT, "EFFECTS", "LEDS"); break;
         case ui::LEDS_DELAY:  ui::setEdit(ui::ED_LED_DELAY, "DELAY", "VAL"); break;
         }
         break;

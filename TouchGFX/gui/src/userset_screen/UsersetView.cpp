@@ -85,6 +85,10 @@ void UsersetView::show()
     {
         ui::setText(textArea3Buffer, TEXTAREA3_SIZE, value ? "ON" : "OFF");
     }
+    else if (edit.edit == ui::ED_LED_EFFECT)
+    {
+        ui::setText(textArea3Buffer, TEXTAREA3_SIZE, Ui_LedEffectName(static_cast<unsigned>(value)));
+    }
     else
     {
         Unicode::snprintf(textArea3Buffer, TEXTAREA3_SIZE, "%d", value);
@@ -114,14 +118,19 @@ void UsersetView::change(int dir)
         Ui_Post(UI_AUDIO_VOLUME, value);                     /* heard right away, stored on BACK */
         break;
     case ui::ED_REPEAT:
-    case ui::ED_LED_DMA:
         value = dir > 0 ? 1 : 0;
         break;
     case ui::ED_LED_EFFECT:
-        value = wrap(value + dir, 0, 1);
+        value = wrap(value + dir, 0, static_cast<int>(Ui_LedEffectCount()) - 1);
+        *field(edit.edit) = static_cast<uint8_t>(value);   /* the LEDs show it right away */
         break;
     case ui::ED_LED_DELAY:
         value = wrap(value + dir * step, 10, 100);
+        *field(edit.edit) = static_cast<uint8_t>(value);
+        break;
+    case ui::ED_LED_DMA:
+        value = dir > 0 ? 1 : 0;
+        *field(edit.edit) = static_cast<uint8_t>(value);
         break;
     case ui::ED_UI_STEP:
         value = wrap(value + dir, 1, 99);
