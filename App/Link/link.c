@@ -82,6 +82,8 @@ static void P_Handle(const GxMsg *m)
       if (state.tracks != (int)m->a) state.playlist_count = 0;   /* list changed: fetch again */
       state.ready = 1;
       state.tracks = (int)m->a;
+      state.recallvol_ack = 0;              /* it (re)started: settings must be sent again */
+      state.repeat_ack = 0;
       break;
     case GX_PLAYLIST:
       if (m->a < GX_PLAYLIST_MAX)
@@ -89,6 +91,7 @@ static void P_Handle(const GxMsg *m)
         strcpy(names[m->a], m->text);
         if (m->a + 1 > state.playlist_count) state.playlist_count = (int)m->a + 1;
         state.tracks = (int)m->b;
+        state.last_playlist_tick = osKernelGetTickCount();
       }
       break;
     case GX_EV_PLAYING:   state.playing = (int)m->a; break;

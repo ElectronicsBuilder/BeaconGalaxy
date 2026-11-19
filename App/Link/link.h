@@ -7,6 +7,7 @@
 #define APP_LINK_H
 
 #include "galaxy_link.h"
+#include <stdint.h>
 
 typedef struct {
   int  ready;             /* GALAXYREADY seen since boot */
@@ -16,6 +17,7 @@ typedef struct {
   int  repeat_ack;        /* REPEATSET seen */
   int  recallvol_ack;     /* RECALLVOL seen */
   unsigned long waveends;
+  uint32_t last_playlist_tick;   /* when the last PLAYLIST line arrived */
   char last_error[GX_NAME_MAX + 1];
 } LinkState;
 
