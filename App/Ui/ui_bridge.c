@@ -10,6 +10,7 @@
 #include "gif_list.h"
 #include "fx.h"
 #include "eeprom.h"
+#include "boot_fuse.h"
 #include "sdcard.h"
 #include "log.h"
 #include "ff.h"
@@ -18,10 +19,9 @@
 #include <strings.h>
 
 #define QUEUE_LEN        16u
-#define BOOT_FUSE_ADDR   100u
 #define REBOOT_DELAY_MS  1000u
 
-static const uint8_t boot_fuse[3] = { 0xF0, 0x00, 0x0A };   /* GalaxyBoot: "update from SD" */
+static const uint8_t boot_fuse[BOOT_FUSE_LEN] = BOOT_FUSE_SET;   /* GalaxyBoot: "update from SD" */
 _Static_assert((int)UI_THEME_COUNT == (int)FX_THEME_COUNT, "UI and fx theme lists differ");
 _Static_assert((int)UI_EQ_VU == (int)FX_EQ_VU, "UI and fx equalizer modes differ");
 

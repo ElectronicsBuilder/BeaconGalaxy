@@ -132,7 +132,24 @@ static int C_Sd(int argc, char **argv)
     Cli_Printf("files=%d", files);
     return 0;
   }
-  return Cli_Error("usage: sd [info|ls [dir] [pattern]|mount]");
+  if (strcmp(sub, "mv") == 0 || strcmp(sub, "rm") == 0)
+  {
+    char a[80], b[80];
+    if (argc < (sub[0] == 'm' ? 4 : 3)) return Cli_Error("usage: sd mv <from> <to> | sd rm <file>");
+    snprintf(a, sizeof a, "%s%s", Sd_Root(), argv[2]);
+    FRESULT r;
+    if (sub[0] == 'm')
+    {
+      snprintf(b, sizeof b, "%s%s", Sd_Root(), argv[3]);
+      r = f_rename(a, b);
+    }
+    else
+    {
+      r = f_unlink(a);
+    }
+    return r == FR_OK ? 0 : Cli_Error("failed (FatFs error %d)", (int)r);
+  }
+  return Cli_Error("usage: sd [info|ls [dir] [pattern]|mount|mv|rm]");
 }
 
 static int C_Key(int argc, char **argv)
@@ -362,11 +379,13 @@ static const CliCommand commands[] = {
   { "ee",       "read|write <addr> ...", "EEPROM bytes", C_Ee,
     "ee read 0 32          dump 32 bytes from address 0\n"
     "ee write 0x200 1 2 3  write bytes" },
-  { "sd",       "[info|ls|mount]",    "SD card", C_Sd,
+  { "sd",       "[info|ls|mount|mv|rm]", "SD card", C_Sd,
     "sd info               size / free\n"
     "sd ls                 root folder\n"
     "sd ls \"\" BAT-*        files matching a pattern\n"
-    "sd mount              mount again (after a card change)" },
+    "sd mount              mount again (after a card change)\n"
+    "sd mv <from> <to>     rename a file in the root folder\n"
+    "sd rm <file>          delete a file in the root folder" },
   { "key",      "up|down|back|enter", "press a front button", C_Key, NULL },
   { "led",      "<color> on|off",     "status LEDs", C_Led, NULL },
   { "fx",       "[off|color|gif|theme|eq|test|gate] ...", "LED matrix effects", C_Fx,

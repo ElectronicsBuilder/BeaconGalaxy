@@ -62,7 +62,11 @@ set(COMMON_SOURCES
     ${COMMON_DIR}/util/crc32.c
     ${COMMON_DIR}/util/swd_console.c
     ${COMMON_DIR}/link/galaxy_link.c
-    ${COMMON_DIR}/stm32f4/uart_io.c)
+    ${COMMON_DIR}/stm32f4/uart_io.c
+    ${COMMON_DIR}/galaxy/oled.c
+    ${COMMON_DIR}/galaxy/eeprom.c)
+set_source_files_properties(${COMMON_DIR}/galaxy/oled.c ${COMMON_DIR}/galaxy/eeprom.c
+    PROPERTIES COMPILE_DEFINITIONS GALAXY_RTOS=1)
 
 # TouchGFX target code we own (outside target/generated, kept by code generation)
 set(GUI_TARGET_SOURCES
@@ -79,8 +83,7 @@ set(APP_INCLUDE_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}/App/Main
     ${CMAKE_CURRENT_SOURCE_DIR}/App/Console
     ${CMAKE_CURRENT_SOURCE_DIR}/App/Board
-    ${CMAKE_CURRENT_SOURCE_DIR}/App/Oled
-    ${CMAKE_CURRENT_SOURCE_DIR}/App/Eeprom
+    ${COMMON_DIR}/galaxy
     ${CMAKE_CURRENT_SOURCE_DIR}/App/Storage
     ${CMAKE_CURRENT_SOURCE_DIR}/App/Link
     ${CMAKE_CURRENT_SOURCE_DIR}/App/Settings
@@ -106,3 +109,16 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
 
     # Add user defined libraries
 )
+
+# Update file for GalaxyBoot: raw binary + CRC trailer -> build/<preset>/BeaconGalaxy.bin
+# (copy it to the SD card root, then About > UPGRADE; see GalaxyBoot/App/Boot/image.h)
+find_package(Python3 COMPONENTS Interpreter)
+if(Python3_FOUND)
+    add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${CMAKE_PROJECT_NAME}> ${CMAKE_CURRENT_BINARY_DIR}/BeaconGalaxy_raw.bin
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../tools/append_crc.py
+                ${CMAKE_CURRENT_BINARY_DIR}/BeaconGalaxy_raw.bin ${CMAKE_CURRENT_BINARY_DIR}/BeaconGalaxy.bin
+        VERBATIM)
+else()
+    message(WARNING "Python 3 not found: BeaconGalaxy.bin (SD-card update file) is not made")
+endif()
