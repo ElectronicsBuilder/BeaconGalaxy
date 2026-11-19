@@ -4,6 +4,7 @@
 #include "sdcard.h"
 #include "fatfs.h"
 #include "log.h"
+#include "sdio.h"
 
 static int mounted;
 
@@ -11,6 +12,13 @@ int Sd_Mount(void)
 {
   if (mounted) return 0;
   FRESULT r = f_mount(&SDFatFS, SDPath, 1);
+  if (r != FR_OK)
+  {
+    /* After a card swap the SDIO/HAL state still describes the old card:
+     * reset the peripheral so the next mount starts the card from scratch. */
+    HAL_SD_DeInit(&hsd);
+    r = f_mount(&SDFatFS, SDPath, 1);
+  }
   if (r != FR_OK)
   {
     LOG_W("SD card: mount failed (%d)", (int)r);
