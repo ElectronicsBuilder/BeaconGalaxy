@@ -37,6 +37,7 @@
 #include "cmsis_os2.h"
 extern "C" {
 #include "oled.h"
+void App_GuiAlive(void);    /* app_main.c: the GUI task reports to the watchdog */
 }
 
 using namespace touchgfx;
@@ -192,6 +193,7 @@ bool TouchGFXHAL::beginFrame()
 void TouchGFXHAL::endFrame()
 {
     TouchGFXGeneratedHAL::endFrame();
+    App_GuiAlive();
     if (frameDirty)
     {
         frameDirty = false;

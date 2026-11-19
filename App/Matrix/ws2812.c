@@ -132,6 +132,9 @@ void DMA1_Stream2_IRQHandler(void)
   uint32_t isr = DMA1->LISR;
   DMA1->LIFCR = DMA_LIFCR_CTCIF2 | DMA_LIFCR_CHTIF2 | DMA_LIFCR_CTEIF2 | DMA_LIFCR_CDMEIF2 | DMA_LIFCR_CFEIF2;
   irqs++;
+  /* Switching the stream off at the end of a frame sets its transfer-complete
+   * flag once more: that interrupt belongs to no frame. */
+  if (!busy) return;
   if (!(isr & (DMA_LISR_HTIF2 | DMA_LISR_TCIF2))) return;
 
   uint16_t *half = (isr & DMA_LISR_TCIF2) ? &pwm[HALF_SLOTS] : &pwm[0];

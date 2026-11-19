@@ -25,6 +25,7 @@
 #include "ui_bridge.h"
 #include "fx.h"
 #include "status_leds.h"
+#include "watchdog.h"
 #include "app_touchgfx.h"
 #include "cmsis_os2.h"
 
@@ -190,8 +191,24 @@ static void P_StartGui(void)
   if (osThreadNew(TouchGFX_Task, NULL, &attr) == NULL) LOG_E("GUI task not started");
 }
 
+/* Watchdog: the App, GUI and fx tasks must each report within WDG_WINDOW_MS,
+ * or the IWDG resets the board (see watchdog.h). Generous timeout while
+ * starting up (SD card, GIF scan), 4 s once running. */
+#define WDG_START_MS  8000u
+#define WDG_RUN_MS    4000u
+
+static int wdg_app = -1, wdg_gui = -1;
+
+void App_GuiAlive(void)
+{
+  Wdg_Alive(wdg_gui);
+}
+
 void App_Init(void)
 {
+  Wdg_Start(WDG_START_MS);
+  wdg_app = Wdg_Register("app");
+  wdg_gui = Wdg_Register("gui");
   console_lock = osMutexNew(NULL);
   console = UartIo_Start(USART1);
   Cli_SetWriter(CONSOLE_PORT, P_ConsoleWrite);
@@ -201,6 +218,8 @@ void App_Init(void)
   Cli_Init(APP_NAME " " APP_VERSION);
   LOG_I("%s %s on %s, %lu MHz, vector table 0x%08lX", APP_NAME, APP_VERSION, APP_BOARD,
         (unsigned long)(HAL_RCC_GetSysClockFreq() / 1000000u), (unsigned long)SCB->VTOR);
+  if (Wdg_LastResetWasWatchdog()) LOG_W("last reset: %s", Wdg_ResetCause());
+  else LOG_I("last reset: %s", Wdg_ResetCause());
 
   Buttons_Init();
   Oled_Init();
@@ -223,8 +242,11 @@ void App_Init(void)
 void App_Run(void)
 {
   uint32_t next = osKernelGetTickCount();
+  Wdg_Start(WDG_RUN_MS);
   for (;;)
   {
+    Wdg_Alive(wdg_app);
+    Wdg_Poll();
     next += TICK_MS;
     uint32_t now = osKernelGetTickCount();
     if ((int32_t)(next - now) > 0) osDelayUntil(next);

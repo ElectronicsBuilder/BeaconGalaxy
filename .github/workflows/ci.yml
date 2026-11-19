@@ -1,4 +1,4 @@
-# Builds BeaconGalaxy (no warnings allowed in our own code) and runs the host
+# Builds BeaconGalaxy in Debug and Release (no warnings allowed in our own code) and runs the host
 # unit tests. Same checks as `sh tools/ci_build.sh` on a PC.
 name: CI
 
@@ -28,5 +28,6 @@ jobs:
         with:
           name: BeaconGalaxy
           path: |
+            build/Release/BeaconGalaxy.elf
+            build/Release/BeaconGalaxy.bin
             build/Debug/BeaconGalaxy.elf
-            build/Debug/BeaconGalaxy.bin

@@ -43,6 +43,35 @@
             "problemMatcher": []
         },
         {
+            "label": "BeaconGalaxy: build Release",
+            "type": "shell",
+            "detail": "-Os, no debug info: the build to run on the board",
+            "command": "cmake --preset Release; cmake --build --preset Release",
+            "group": "build",
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation": "absolute"
+            }
+        },
+        {
+            "label": "BeaconGalaxy: flash application (Release)",
+            "detail": "Galaxy F405 board over SWD; sectors 6-11 at 0x08040000; GalaxyBoot is kept",
+            "type": "shell",
+            "command": "C:/ST/STM32CubeCLT_1.16.0/STM32CubeProgrammer/bin/STM32_Programmer_CLI.exe",
+            "args": [
+                "-c",
+                "port=SWD",
+                "sn=${input:stlink}",
+                "mode=UR",
+                "-w",
+                "build/Release/BeaconGalaxy.elf",
+                "-v",
+                "-rst"
+            ],
+            "dependsOn": "BeaconGalaxy: build Release",
+            "problemMatcher": []
+        },
+        {
             "label": "BeaconGalaxy: reset",
             "type": "shell",
             "command": "C:/ST/STM32CubeCLT_1.16.0/STM32CubeProgrammer/bin/STM32_Programmer_CLI.exe",

@@ -5,11 +5,12 @@
 #include "settings.h"
 #include "app_hal.h"
 #include "log.h"
+#include "watchdog.h"
 #include "cmsis_os2.h"
 #include <stddef.h>
 
 #define QUEUE_LEN   8u
-#define IDLE_WAIT   osWaitForever
+#define IDLE_WAIT   500u          /* wake up now and then to report to the watchdog */
 
 typedef struct { FxKind kind; int32_t arg; } FxReq;
 
@@ -17,6 +18,7 @@ static osMessageQueueId_t queue;
 static volatile FxStatus status;
 static const FxOps *ops;
 static uint32_t rng_state;
+static int wdg_id = -1;
 
 static const char *const kind_names[FX_KIND_COUNT] = { "off", "color", "gif", "theme", "eq", "test" };
 
@@ -93,6 +95,7 @@ static void P_Task(void *arg)
   uint32_t next = 0;
   for (;;)
   {
+    Wdg_Alive(wdg_id);
     uint32_t wait = IDLE_WAIT;
     if (ops)
     {
@@ -137,6 +140,7 @@ void Fx_Init(void)
     .priority = osPriorityBelowNormal,
   };
   queue = osMessageQueueNew(QUEUE_LEN, sizeof(FxReq), NULL);
+  wdg_id = Wdg_Register("fx");
   if (queue == NULL || osThreadNew(P_Task, NULL, &attr) == NULL) LOG_E("fx task not started");
 }
 

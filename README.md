@@ -36,6 +36,8 @@ Part of a three-repository system:
 - **SD card:** removal and insertion are noticed without a detect switch, and
   the start screen shows NO SD.
 - **Settings:** stored in the EEPROM with a CRC.
+- **Watchdog:** the App, GUI and fx tasks are supervised; a stuck task resets
+  the board, and the next boot reports which task it was.
 
 ## Build
 
@@ -43,15 +45,16 @@ You need STM32CubeCLT 1.16 (arm-none-eabi-gcc, CMake, Ninja) on the PATH, and
 Python 3, which writes the update file.
 
 ```
-cmake --preset Debug
-cmake --build --preset Debug
+cmake --preset Release
+cmake --build --preset Release
 ```
 
-The build writes:
+`Release` (`-Os`) is the build to run on the board; `Debug` (`-O0 -g3`) is for
+the debugger. The build writes:
 
-- `build/Debug/BeaconGalaxy.elf`, for flashing over SWD;
-- `build/Debug/BeaconGalaxy.bin`, the SD-card update file (application plus a
-  CRC trailer).
+- `build/<preset>/BeaconGalaxy.elf`, for flashing over SWD;
+- `build/<preset>/BeaconGalaxy.bin`, the SD-card update file (application
+  plus a CRC trailer).
 
 VS Code tasks (`.vscode/tasks.json`) cover building, flashing, the console
 over SWD, TouchGFX generation, the host tests and the CI checks.
@@ -61,7 +64,7 @@ over SWD, TouchGFX generation, the host tests and the CI checks.
 The application lives at 0x08040000; GalaxyBoot occupies the first 256 KB.
 
 ```
-STM32_Programmer_CLI -c port=SWD sn=<st-link serial> mode=UR -w build/Debug/BeaconGalaxy.elf -v -rst
+STM32_Programmer_CLI -c port=SWD sn=<st-link serial> mode=UR -w build/Release/BeaconGalaxy.elf -v -rst
 ```
 
 To update without a probe:
@@ -73,7 +76,7 @@ To update without a probe:
 
 - **Serial:** USART1 through the on-board FT232, 115200 baud.
 - **Over SWD, no wiring:**
-  `python tools/swd_console.py build/Debug/BeaconGalaxy.elf <st-link serial> "help"`
+  `python tools/swd_console.py build/Release/BeaconGalaxy.elf <st-link serial> "help"`
 
 Useful commands:
 
@@ -83,6 +86,7 @@ Useful commands:
 | `sd` | SD card (`ls`, `info`, `mv`, `rm`) |
 | `link` | link to the audio board |
 | `key` | presses a front button |
+| `wdg` | watchdog: supervised tasks, last reset cause, tests (`wdg stall fx`, `wdg hang`) |
 | `tasks`, `ee`, `led`, `oled` | RTOS tasks, EEPROM, status LEDs, OLED tests |
 
 ## Layout

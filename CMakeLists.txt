@@ -71,6 +71,7 @@ set(COMMON_SOURCES
     ${COMMON_DIR}/util/swd_console.c
     ${COMMON_DIR}/link/galaxy_link.c
     ${COMMON_DIR}/stm32f4/uart_io.c
+    ${COMMON_DIR}/stm32f4/watchdog.c
     ${COMMON_DIR}/galaxy/oled.c
     ${COMMON_DIR}/galaxy/eeprom.c)
 set_source_files_properties(${COMMON_DIR}/galaxy/oled.c ${COMMON_DIR}/galaxy/eeprom.c
