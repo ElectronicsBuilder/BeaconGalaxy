@@ -42,9 +42,17 @@ add_subdirectory(cmake/touchgfx)
 
 # ---------------------------------------------------------------------------
 # BeaconGalaxy application code (App/) and code shared with AudioGalaxy
-# (../common). CubeMX owns Core/, Drivers/, Middlewares/, FATFS/.
+# (common/). CubeMX owns Core/, Drivers/, Middlewares/, FATFS/.
 # ---------------------------------------------------------------------------
-set(COMMON_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../common)
+# Shared code and tools: inside this project (stand-alone repository) or next
+# to it (the combined Galaxy workspace).
+if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/common)
+    set(COMMON_DIR ${CMAKE_CURRENT_SOURCE_DIR}/common)
+    set(TOOLS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/tools)
+else()
+    set(COMMON_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../common)
+    set(TOOLS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../tools)
+endif()
 
 # The app is linked at 0x08040000, after the GalaxyBoot bootloader (256 KB).
 # BeaconGalaxy_app.ld is the CubeMX script with only the FLASH region moved.
@@ -116,7 +124,7 @@ find_package(Python3 COMPONENTS Interpreter)
 if(Python3_FOUND)
     add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
         COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${CMAKE_PROJECT_NAME}> ${CMAKE_CURRENT_BINARY_DIR}/BeaconGalaxy_raw.bin
-        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../tools/append_crc.py
+        COMMAND ${Python3_EXECUTABLE} ${TOOLS_DIR}/append_crc.py
                 ${CMAKE_CURRENT_BINARY_DIR}/BeaconGalaxy_raw.bin ${CMAKE_CURRENT_BINARY_DIR}/BeaconGalaxy.bin
         VERBATIM)
 else()

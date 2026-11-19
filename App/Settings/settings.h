@@ -22,7 +22,7 @@ typedef struct {
   uint8_t ui_step;              /* +/- step in the value editors, 1..99 */
   uint8_t gif_fps;              /* 1..100 */
   uint8_t autoplay_max_min;     /* auto GIF/theme: change every 1..N minutes (random) */
-  uint8_t led_effect;           /* 0..1 */
+  uint8_t led_effect;           /* LED_FX_* (status_leds.h) */
   uint8_t led_delay;            /* 10..100 ms */
   uint8_t led_dma;              /* 1: blue status LED shows matrix transfers */
   uint8_t repeat;               /* audio repeat on/off */

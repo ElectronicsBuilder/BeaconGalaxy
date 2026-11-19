@@ -1,0 +1,44 @@
+# Build output
+build/
+*.o
+*.d
+*.su
+*.map
+*.elf
+*.bin
+*.hex
+
+# CubeMX temporary files
+MXTmpFiles/
+*.bak
+
+# Editor / OS
+.vs/
+*.swp
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Host tests
+tests/host/build/
+
+# TouchGFX: Designer output and the parts of the framework the firmware does not
+# build with (kept: headers, the Cortex-M4F GCC hard-float library, OS wrappers)
+TouchGFX/build/
+TouchGFX/simulator/
+TouchGFX/*.touchgfx.part
+TouchGFX/*_backup.touchgfx
+TouchGFX/generated/simulator/
+Middlewares/ST/touchgfx/framework/tools/
+Middlewares/ST/touchgfx/framework/source/
+Middlewares/ST/touchgfx/3rdparty/
+Middlewares/ST/touchgfx/lib/*
+!Middlewares/ST/touchgfx/lib/core/
+Middlewares/ST/touchgfx/lib/core/*
+!Middlewares/ST/touchgfx/lib/core/cortex_m4f/
+Middlewares/ST/touchgfx/lib/core/cortex_m4f/*
+!Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc/
+Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc/libtouchgfx.a
